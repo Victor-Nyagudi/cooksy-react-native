@@ -4,6 +4,12 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 
 import { useFonts } from "expo-font";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+import IntroScreen from './components/screens/IntroScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,9 +35,10 @@ export default function App() {
     return null;
 
   return (
-    <View style={globalStyles.container}>
-      <Text style={ globalStyles.lightModeTitle }>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Intro' component={ IntroScreen }/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

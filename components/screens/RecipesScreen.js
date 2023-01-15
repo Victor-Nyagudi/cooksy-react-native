@@ -1,8 +1,13 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import globalStyles from "../../non-components/globalStyles";
 
 function RecipesScreen() {
     return ( 
-        <View></View>
+        <View>
+            <Text style={ globalStyles.lightModeTitle }>
+                This is the recipes screen.
+            </Text>
+        </View>
     );
 }
 
