@@ -29,12 +29,39 @@ const colors = {
     white: 'hsla(0, 0%, 100%, 1.0),' // #FFFFFF
 };
 
+//#region Inherited styles
+
+const lightModeParagraph = {
+    fontFamily: 'roboto-regular',
+    fontSize: 16,
+    color: colors.darkBrown
+};
+
+const lightModeTitle = {
+    fontFamily: 'work-sans-semi-bold',
+    fontSize: 32,
+    color: colors.darkBrown
+}
+
+//#endregion
+
 const globalStyles = StyleSheet.create({
+    lightModeParagraph: { ...lightModeParagraph },
+    lightModeTitle: { ...lightModeTitle },
+    translucentLightModeParagraph: {
+        ...lightModeParagraph,
+        color: colors.translucentDarkBrown
+    },
+    lightModeTitleThin: {
+        ...lightModeTitle,
+        fontFamily: 'work-sans-light'
+    },
+
     container: {
         flex: 1,
         backgroundColor: colors.lightModeBackground,
         padding: 30
-    }
+    },
 });
 
 export default globalStyles;

@@ -30,7 +30,7 @@ export default function App() {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={{ fontFamily: 'work-sans-regular', fontSize: 30 }}>Open up App.js to start working on your app!</Text>
+      <Text style={ globalStyles.lightModeTitle }>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
   );
