@@ -1,13 +1,10 @@
-import globalStyles from './non-components/globalStyles';
-
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-
 import { useFonts } from "expo-font";
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import IntroScreen from './components/screens/IntroScreen';
+import HomeTabNavigation from "./components/shared/HomeTabNavigation";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +35,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name='Intro' component={ IntroScreen }/>
+        
+        <Stack.Screen 
+          name='Home' 
+          component={ HomeTabNavigation }
+          // options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
