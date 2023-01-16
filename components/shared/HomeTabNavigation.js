@@ -31,7 +31,7 @@ function HomeTabNavigation() {
                     else 
                         icon = faGear;
 
-                    return <FontAwesomeIcon icon={ icon } size={ 15 } color={ focused ? 'red' : 'black' } />
+                    return <FontAwesomeIcon icon={ icon } size={ size } color={ color } />
                 }                
             })}
         >
