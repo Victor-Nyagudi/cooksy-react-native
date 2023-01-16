@@ -26,8 +26,10 @@ const colors = {
     translucentDarkBrown: 'hsla(342, 30%, 8%, 0.45)', // #1C0F13
 
     // * Shared
-    white: 'hsla(0, 0%, 100%, 1.0),' // #FFFFFF
+    white: 'hsla(0, 0%, 100%, 1.0)' // #FFFFFF
 };
+
+export const getColor = (color) => colors[color] ? colors[color] : 'red'; 
 
 //#region Inherited styles
 
@@ -46,6 +48,8 @@ const lightModeTitle = {
 //#endregion
 
 const globalStyles = StyleSheet.create({
+    lightModeBackgroundColor: colors.lightModeBackground,
+    darkModeBackgroundColor: colors.darkModeBackground,
     lightModeParagraph: { ...lightModeParagraph },
     lightModeTitle: { ...lightModeTitle },
     translucentLightModeParagraph: {

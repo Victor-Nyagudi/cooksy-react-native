@@ -1,3 +1,4 @@
+import globalStyles, { getColor } from "./non-components/globalStyles";
 import { useFonts } from "expo-font";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -5,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import IntroScreen from './components/screens/IntroScreen';
 import HomeTabNavigation from "./components/shared/HomeTabNavigation";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -33,13 +35,27 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='Intro' component={ IntroScreen }/>
+      <Stack.Navigator screenOptions={{
+        headerStyle: {
+          backgroundColor: globalStyles.lightModeBackgroundColor,
+        },
+        headerShadowVisible: false,
+        headerTitleStyle: {
+          fontFamily: 'work-sans-semi-bold',
+          fontSize: 24,
+          color: getColor('darkBrown')
+        },
+        headerTitleAlign: 'center'
+      }}>
+        <Stack.Screen 
+          name='Intro' 
+          component={ IntroScreen }
+          options={{ title: 'Cooksy' }}
+        />
         
         <Stack.Screen 
           name='Home' 
           component={ HomeTabNavigation }
-          // options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
