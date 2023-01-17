@@ -14,7 +14,7 @@ const borderRadius = {
     tabNavbar: 12
 };
 
-const colors = {
+export const colors = {
     // * Dark mode 
     darkModeBackground: 'hsla(260, 4%, 15%, 1.0)', // #252427
     darkGreyPurple: 'hsla(270, 4%, 22%, 1.0)', // #373539 
@@ -66,6 +66,25 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.lightModeBackground,
         padding: 30
     },
+    tabBarContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: 'lightsalmon',
+        borderRadius: borderRadius.tabNavbar,
+        paddingHorizontal: 7,
+        paddingVertical: 6
+    },
+    tabBarButton: {
+        flex: 1,
+        alignItems: 'center',
+        borderRadius: borderRadius.parent,
+        backgroundColor: 'white',
+        paddingHorizontal: 9,
+        paddingBottom: 9,
+        paddingTop: 10
+    },
+    tabBarButtonText: { fontFamily: 'nunito-regular' },
+    tabBarIcon: { marginBottom: 3.5 }
 });
 
 export default globalStyles;

@@ -12,9 +12,15 @@
 */
 import { Pressable, View, Text } from "react-native";
 
+import globalStyles, { colors } from "../../non-components/globalStyles";
+
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { faFireBurner, faGear, faListCheck } from "@fortawesome/free-solid-svg-icons";
+
 function CustomTabBar({ state, descriptors, navigation }) {
     return ( 
-        <View style={{flex: 1}}>
+        <View style={ globalStyles.tabBarContainer }>
             {
                 state.routes.map((route, index) => {
                     const { options } = descriptors[route.key];
@@ -26,8 +32,23 @@ function CustomTabBar({ state, descriptors, navigation }) {
                         ? options.title
                         : route.name;
 
+                    const lowerCaseLabel = label.toLowerCase();
+                    
+                    const icon = 
+                        lowerCaseLabel === 'inspirations' ? faLightbulb
+                        : lowerCaseLabel === 'my recipes' ? faListCheck
+                        : lowerCaseLabel === 'cook now!' ? faFireBurner
+                        : faGear;
+
                     const isFocused = state.index === index;
 
+                    const isLastItem = index === state.routes.length - 1;
+
+                    /*
+                        * This custom function should not be 
+                        * confused with the built in 'onPress' prop
+                        * in some components e.g. 'Button'
+                    */
                     const onPress = () => {
                         const event = navigation.emit({
                             type: 'tabPress',
@@ -41,13 +62,26 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
                     return (
                         <Pressable
+                            key={ index }
                             accessibilityRole="button"
                             accessibilityState={ isFocused ? { selected: true } : {} }
                             accessibilityLabel={ options.tabBarAccessibilityLabel }
                             testID={ options.tabBarTestID }
                             onPress={ onPress }
+                            style={{ ...globalStyles.tabBarButton, marginRight: isLastItem ? 0 : 4 }}
                         >
-                            <Text style={{ color: isFocused ? 'green' : 'blue'  }}>
+                            <FontAwesomeIcon 
+                                icon={ icon }
+                                size={ 16 }
+                                color={ isFocused ? 'blue' : colors.darkBrown }
+                                style={ globalStyles.tabBarIcon }
+                            />
+                            <Text 
+                                style={{ 
+                                    ...globalStyles.tabBarButtonText, 
+                                    color: isFocused ? 'blue' : colors.darkBrown 
+                                }}
+                            >
                                 { label }
                             </Text>
                         </Pressable>
