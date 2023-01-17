@@ -13,23 +13,52 @@ function IntroScreen({ navigation }) {
     return ( 
         <View style={{
             ...globalStyles.container,
+            justifyContent: 'space-between',
             paddingTop: insets.top,
             paddingBottom: insets.bottom
         }}>
-            <Text style={ globalStyles.lightModeTitle }>
-                Welcome to the Intro Screen.
-            </Text>
+            <View style={{ flex: 1 }}>
+                {/* 
+                    This component exists purely for styling purposes
+                    so that the content is centered on the screen and 
+                    the button is at the bottom when 'space-between' is
+                    used to justify-content.
+                */}
+            </View>
 
-            <LightModeIllustration />
+            <View style={ globalStyles.introScreenContent }>
+                <View style={ globalStyles.intoScreenIllustration }>
+                    <LightModeIllustration />
+                </View>
 
-            <Pressable 
-                style={ globalStyles.introScreenButton }
-                onPress={ () => navigation.navigate('Home') }
-            >
-                <Text style={ globalStyles.introScreenButtonText }>
-                    Let's start
+                <Text style={{ 
+                    ...globalStyles.lightModeTitle,
+                    textAlign: 'center',
+                    marginBottom: 12 
+                }}>
+                    All the recipes on your fingertips
                 </Text>
-            </Pressable>
+
+                {/* 
+                    This article helped with writing the registered
+                    trademark symbol in React Native.
+                    https://reactnativecode.com/add-show-copyright-symbol-icon/
+                */}
+                <Text style={ globalStyles.introScreenSubHeading }>
+                    Cooking on Thermomix<Text style={ globalStyles.superscript }>{'\u00AE'}</Text> made easy
+                </Text>
+            </View>
+                
+            <View style={ globalStyles.introScreenButtonContainer }>
+                <Pressable 
+                    style={ globalStyles.introScreenButton }
+                    onPress={ () => navigation.navigate('Home') }
+                >
+                    <Text style={ globalStyles.introScreenButtonText }>
+                        Let's start
+                    </Text>
+                </Pressable>
+            </View>
         </View>
     );
 }

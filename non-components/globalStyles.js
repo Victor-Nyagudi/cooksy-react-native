@@ -41,7 +41,7 @@ const lightModeParagraph = {
 
 const lightModeTitle = {
     fontFamily: 'work-sans-semi-bold',
-    fontSize: 32,
+    fontSize: 30,
     color: colors.darkBrown
 }
 
@@ -50,6 +50,7 @@ const lightModeTitle = {
 const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: 'center',
         backgroundColor: colors.lightModeBackground,
         paddingHorizontal: 30
     },
@@ -87,16 +88,35 @@ const globalStyles = StyleSheet.create({
     tabBarButtonText: { fontFamily: 'nunito-regular' },
     tabBarIcon: { marginBottom: 3.5 },
 
+    introScreenButtonContainer: { 
+        flex: 1, 
+        justifyContent: 'flex-end', 
+        width: '100%', 
+        paddingBottom: 30
+    },
     introScreenButton: {
         backgroundColor: colors.darkBrown,
         borderRadius: borderRadius.parent,
-        padding: 13
+        padding: 13,
+        width: '100%'
     },
     introScreenButtonText: {
         fontFamily: 'work-sans-semi-bold',
         fontSize: 18,
         color: colors.white,
         textAlign: 'center'
+    },
+    intoScreenIllustration: { marginBottom: 50 },
+    introScreenSubHeading: {
+        fontFamily: 'nunito-regular',
+        fontSize: 17,
+        color: 'hsla(342, 30%, 8%, .9)', // * <- Just dark brown at 90% opacity
+        textAlign: 'center'
+    },
+    introScreenContent: { 
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center' 
     }
 });
 

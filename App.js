@@ -48,7 +48,8 @@ export default function App() {
             fontSize: 24,
             color: getColor('darkBrown')
           },
-          headerTitleAlign: 'center'
+          headerTitleAlign: 'center',
+          headerTransparent: true // * <- Absolutely position header. Read more in docs: https://reactnavigation.org/docs/native-stack-navigator#headertransparent
         }}>
           <Stack.Screen 
             name='Intro' 
