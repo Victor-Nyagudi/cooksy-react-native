@@ -49,12 +49,14 @@ export default function App() {
             color: getColor('darkBrown')
           },
           headerTitleAlign: 'center',
-          headerTransparent: true // * <- Absolutely position header. Read more in docs: https://reactnavigation.org/docs/native-stack-navigator#headertransparent
         }}>
           <Stack.Screen 
             name='Intro' 
             component={ IntroScreen }
-            options={{ title: 'Cooksy' }}
+            options={{ 
+              title: 'Cooksy',
+              headerTransparent: true // * <- Absolutely position header. Read more in docs: https://reactnavigation.org/docs/native-stack-navigator#headertransparent
+            }}
           />
           
           <Stack.Screen 
