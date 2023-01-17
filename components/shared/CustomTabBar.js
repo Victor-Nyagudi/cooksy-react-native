@@ -42,8 +42,6 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
                     const isFocused = state.index === index;
 
-                    const isLastItem = index === state.routes.length - 1;
-
                     /*
                         * This custom function should not be 
                         * confused with the built in 'onPress' prop
@@ -60,6 +58,9 @@ function CustomTabBar({ state, descriptors, navigation }) {
                             navigation.navigate({ name: route.name, merge: true });
                     };
 
+                    const isLastItem = index === state.routes.length - 1;
+                    const tabButtonContentColor = isFocused ? colors.white : colors.darkBrown;
+
                     return (
                         <Pressable
                             key={ index }
@@ -68,18 +69,22 @@ function CustomTabBar({ state, descriptors, navigation }) {
                             accessibilityLabel={ options.tabBarAccessibilityLabel }
                             testID={ options.tabBarTestID }
                             onPress={ onPress }
-                            style={{ ...globalStyles.tabBarButton, marginRight: isLastItem ? 0 : 4 }}
+                            style={{ 
+                                ...globalStyles.tabBarButton, 
+                                marginRight: isLastItem ? 0 : 4,
+                                backgroundColor: isFocused ? colors.darkBrown : colors.white
+                            }}
                         >
                             <FontAwesomeIcon 
                                 icon={ icon }
                                 size={ 16 }
-                                color={ isFocused ? 'blue' : colors.darkBrown }
+                                color={ tabButtonContentColor }
                                 style={ globalStyles.tabBarIcon }
                             />
                             <Text 
                                 style={{ 
                                     ...globalStyles.tabBarButtonText, 
-                                    color: isFocused ? 'blue' : colors.darkBrown 
+                                    color: tabButtonContentColor 
                                 }}
                             >
                                 { label }

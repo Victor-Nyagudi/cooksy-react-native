@@ -80,8 +80,8 @@ const globalStyles = StyleSheet.create({
         borderRadius: borderRadius.parent,
         backgroundColor: 'white',
         paddingHorizontal: 9,
-        paddingBottom: 9,
-        paddingTop: 10
+        paddingBottom: 8.5,
+        paddingTop: 11
     },
     tabBarButtonText: { fontFamily: 'nunito-regular' },
     tabBarIcon: { marginBottom: 3.5 }
