@@ -4,6 +4,8 @@ import globalStyles from "../../non-components/globalStyles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import LightModeIllustration from "../miscellaneous/LightModeIllustration";
+// TODO: import DarkModeIllustration from "../miscellaneous/Dark";
+
 
 function IntroScreen({ navigation }) {
     const insets = useSafeAreaInsets();
