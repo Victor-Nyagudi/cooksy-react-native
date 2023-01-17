@@ -7,6 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import IntroScreen from './components/screens/IntroScreen';
 import HomeTabNavigation from "./components/shared/HomeTabNavigation";
 
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -34,30 +36,32 @@ export default function App() {
     return null;
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerStyle: {
-          backgroundColor: globalStyles.lightModeBackgroundColor,
-        },
-        headerShadowVisible: false,
-        headerTitleStyle: {
-          fontFamily: 'work-sans-semi-bold',
-          fontSize: 24,
-          color: getColor('darkBrown')
-        },
-        headerTitleAlign: 'center'
-      }}>
-        <Stack.Screen 
-          name='Intro' 
-          component={ IntroScreen }
-          options={{ title: 'Cooksy' }}
-        />
-        
-        <Stack.Screen 
-          name='Home' 
-          component={ HomeTabNavigation }
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{
+          headerStyle: {
+            backgroundColor: globalStyles.lightModeBackgroundColor,
+          },
+          headerShadowVisible: false,
+          headerTitleStyle: {
+            fontFamily: 'work-sans-semi-bold',
+            fontSize: 24,
+            color: getColor('darkBrown')
+          },
+          headerTitleAlign: 'center'
+        }}>
+          <Stack.Screen 
+            name='Intro' 
+            component={ IntroScreen }
+            options={{ title: 'Cooksy' }}
+          />
+          
+          <Stack.Screen 
+            name='Home' 
+            component={ HomeTabNavigation }
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

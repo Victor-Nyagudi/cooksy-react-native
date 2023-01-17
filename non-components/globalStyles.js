@@ -48,6 +48,12 @@ const lightModeTitle = {
 //#endregion
 
 const globalStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colors.lightModeBackground,
+        paddingHorizontal: 30
+    },
+
     lightModeBackgroundColor: colors.lightModeBackground,
     darkModeBackgroundColor: colors.darkModeBackground,
     lightModeParagraph: { ...lightModeParagraph },
@@ -60,12 +66,7 @@ const globalStyles = StyleSheet.create({
         ...lightModeTitle,
         fontFamily: 'work-sans-light'
     },
-
-    container: {
-        flex: 1,
-        backgroundColor: colors.lightModeBackground,
-        padding: 30
-    },
+    
     tabBarContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -84,7 +85,19 @@ const globalStyles = StyleSheet.create({
         paddingTop: 11
     },
     tabBarButtonText: { fontFamily: 'nunito-regular' },
-    tabBarIcon: { marginBottom: 3.5 }
+    tabBarIcon: { marginBottom: 3.5 },
+
+    introScreenButton: {
+        backgroundColor: colors.darkBrown,
+        borderRadius: borderRadius.parent,
+        padding: 13
+    },
+    introScreenButtonText: {
+        fontFamily: 'work-sans-semi-bold',
+        fontSize: 18,
+        color: colors.white,
+        textAlign: 'center'
+    }
 });
 
 export default globalStyles;
