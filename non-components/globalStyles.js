@@ -127,8 +127,11 @@ const globalStyles = StyleSheet.create({
     tabBarContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        
         backgroundColor: 'lightsalmon',
         borderRadius: borderRadius.tabNavbar,
+        
+        marginHorizontal: 15,
         paddingHorizontal: 7,
         paddingVertical: 6
     },
@@ -141,7 +144,10 @@ const globalStyles = StyleSheet.create({
         paddingBottom: 8.5,
         paddingTop: 11
     },
-    tabBarButtonText: { fontFamily: 'nunito-regular' },
+    tabBarButtonText: { 
+        fontFamily: 'nunito-regular',
+        fontSize: 13 
+    },
     tabBarIcon: { marginBottom: 3.5 },
     //#endregion
 
