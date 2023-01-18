@@ -23,16 +23,19 @@ function HomeScreen({ navigation }) {
             paddingBottom: insets.bottom
         }}>
             <ScrollView 
-                contentContainerStyle={{ paddingHorizontal: 30 }}
+                contentContainerStyle={{ 
+                    paddingHorizontal: 30
+                }}
             >
                 <ScrollView 
                     horizontal
+                    showsHorizontalScrollIndicator={ false }
                     contentContainerStyle={ globalStyles.homeScreenHero }
                 >
                     <View style={ globalStyles.recipeOfDay }>
                         <Text style={{
                             ...globalStyles.lightModeTitleBig,
-                            marginBottom: 28
+                            marginBottom: 26
                         }}>
                             Recipe {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>of the day</Text>
                         </Text>
@@ -41,7 +44,7 @@ function HomeScreen({ navigation }) {
                             ...globalStyles.cardTitleSmall,
                             marginBottom: 7
                         }}>
-                            Roasted pumpkin soup
+                            Roasted Pumpkin Soup
                         </Text>
 
                         <RecipePrepInfo />

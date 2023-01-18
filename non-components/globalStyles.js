@@ -23,7 +23,7 @@ export const colors = {
     // * Light mode
     lightModeBackground: 'hsla(30, 17%, 95%, 1.0)', // #F5F3F1
     darkBrown: 'hsla(342, 30%, 8%, 1.0)', // #1C0F13
-    translucentDarkBrown: 'hsla(342, 30%, 8%, 0.45)', // #1C0F13
+    translucentDarkBrown: 'hsla(342, 30%, 8%, 0.65)', // #1C0F13
 
     // * Shared
     white: 'hsla(0, 0%, 100%, 1.0)' // #FFFFFF
@@ -87,9 +87,18 @@ const globalStyles = StyleSheet.create({
         color: colors.white,
         textAlign: 'center'
     },
+    recipePrepInfoContainer: {
+        flexDirection: 'row',
+        marginBottom: 15
+    },
     recipePrepInfo: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    recipePrepText: {
+        fontFamily: 'nunito-regular',
+        fontSize: 15,
+        color: colors.translucentDarkBrown
     },
     //#endregion
 
@@ -156,6 +165,11 @@ const globalStyles = StyleSheet.create({
     //#endregion
     
     //#region Home Screen styles
+    homeScreenHero: {
+        alignItems: 'flex-start',
+        backgroundColor: 'pink',
+        maxHeight: 365
+    },
     cardTitleSmall: {
         fontFamily: 'work-sans-medium',
         fontSize: 16,
@@ -167,7 +181,9 @@ const globalStyles = StyleSheet.create({
         marginRight: 15
     },
     recipeOfDayImage: {
-        maxWidth: '100%'
+        borderRadius: borderRadius.child,
+        maxWidth: '100%',
+        maxHeight: 121
     }
     //#endregion
 });

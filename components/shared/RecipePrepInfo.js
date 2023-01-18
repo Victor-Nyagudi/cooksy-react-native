@@ -8,10 +8,11 @@ import RecipePrepItem from "./RecipePrepItem";
 
 function RecipePrepInfo() {
     return ( 
-        <View style={{ flexDirection: 'row' }}>
+        <View style={ globalStyles.recipePrepInfoContainer }>
             <RecipePrepItem 
                 icon={ faClock }
                 text={ '50 min' }
+                marginRight={ 12 }
             />
             
             <RecipePrepItem 
