@@ -1,10 +1,10 @@
 import globalStyles, { colors } from "../../non-components/globalStyles";
-import { 
-    View, 
-    Text, 
-    ScrollView, 
+import {
+    View,
+    Text,
+    ScrollView,
     Pressable,
-    Image 
+    Image
 } from "react-native";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -17,22 +17,22 @@ import RecipePrepInfo from "../shared/RecipePrepInfo";
 function HomeScreen({ navigation }) {
     const insets = useSafeAreaInsets();
 
-    return ( 
+    return (
         <View style={{
             backgroundColor: colors.lightModeBackground,
             paddingBottom: insets.bottom
         }}>
-            <ScrollView 
-                contentContainerStyle={{ 
+            <ScrollView
+                contentContainerStyle={{
                     paddingHorizontal: 30
                 }}
             >
-                <ScrollView 
+                <ScrollView
                     horizontal
-                    showsHorizontalScrollIndicator={ false }
-                    contentContainerStyle={ globalStyles.homeScreenHero }
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={globalStyles.homeScreenHero}
                 >
-                    <View style={ globalStyles.recipeOfDay }>
+                    <View style={globalStyles.recipeOfDay}>
                         <Text style={{
                             ...globalStyles.lightModeTitleBig,
                             marginBottom: 26
@@ -49,59 +49,64 @@ function HomeScreen({ navigation }) {
 
                         <RecipePrepInfo />
 
-                        <Image 
-                            source={ require('../../assets/images/jpg/pumpkins.jpg') }
-                            style={ globalStyles.recipeOfDayImage }
+                        <Image
+                            source={require('../../assets/images/jpg/pumpkins.jpg')}
+                            style={globalStyles.recipeOfDayImage}
                         />
                     </View>
-                    
-                    <View>
-                        <View style={ globalStyles.heroCardTall }>
-                            <Text style={ globalStyles.lightModeTitleBig }>
-                                Cook <Text style={{ fontFamily: 'work-sans-light' }}>like a pro</Text>
+
+                    <View style={{ paddingTop: 31 }}>
+                        <View style={globalStyles.heroCardTall}>
+                            <Text style={globalStyles.lightModeTitleBig}>
+                                Cook {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>like a pro</Text>
                             </Text>
 
                             <Pressable
-                                onPress={ () => console.log('This is a dummy link.') }
+                                onPress={() => console.log('This is a dummy link.')}
                             >
-                                <Text style={ globalStyles.cardTitleSmall }>
+                                <Text style={globalStyles.cardTitleSmall}>
                                     Thermomix{'\u00AE'} advanced tips and tricks
                                 </Text>
 
-                                <FontAwesomeIcon icon={ faAngleRight } />
+                                <View style={ globalStyles.homeScreenHeroCaret }>
+                                    <FontAwesomeIcon
+                                        icon={faAngleRight}
+                                        style={{ position: 'absolute' }}
+                                    />
+                                </View>
                             </Pressable>
                         </View>
-                        
-                        <View style={ globalStyles.heroCardShort }>
-                            <Text style={ globalStyles.lightModeTitleBig }>
-                                    Check <Text style={{ fontFamily: 'work-sans-light' }}>new updates</Text>
+
+                        <View style={globalStyles.heroCardShort}>
+                            <Text style={globalStyles.lightModeTitleBig}>
+                                Check {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>new updates</Text>
                             </Text>
                         </View>
                     </View>
                 </ScrollView>
-                <Text style={ globalStyles.lightModeTitleBig }>
+                <Text style={globalStyles.lightModeTitleBig}>
                     Ren{'\u00E9'} Redzepi <Text style={{ fontFamily: 'work-sans-light' }}>recommends</Text>
                 </Text>
 
-                <View style={ globalStyles.card }>
-                    <Image 
-                        style={ globalStyles.cardImage }
-                        source={ require('../../assets/images/jpg/chef-cooking.jpg') }
+                <View style={globalStyles.card}>
+                    <Image
+                        style={globalStyles.cardImage}
+                        source={require('../../assets/images/jpg/chef-cooking.jpg')}
                     />
 
-                    <Text style={ globalStyles.cardTitleMedium }>
+                    <Text style={globalStyles.cardTitleMedium}>
                         Vegan Thai Curry Soup
                     </Text>
 
-                    <Text style={ globalStyles.lightModeParagraph }>
+                    <Text style={globalStyles.lightModeParagraph}>
                         Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
                     </Text>
 
                     <RecipePrepInfo />
 
                     <Pressable
-                        style={ globalStyles.wideButtonTransparent }
-                        onPress={ () => navigation.navigate('My recipes') }
+                        style={globalStyles.wideButtonTransparent}
+                        onPress={() => navigation.navigate('My recipes')}
                     >
                         <Text style={{
                             ...globalStyles.wideButtonText,

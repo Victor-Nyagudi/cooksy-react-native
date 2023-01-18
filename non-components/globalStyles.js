@@ -57,6 +57,7 @@ const card = {
     padding: 25
 }
 
+const heroCardMaxWidth = 244;
 //#endregion
 
 /*
@@ -79,7 +80,7 @@ const globalStyles = StyleSheet.create({
     wideButtonTransparent: {
         ...wideButton,
         borderStyle: 'solid',
-        borderWidth: 2 
+        borderWidth: 2
     },
     wideButtonText: {
         fontFamily: 'work-sans-semi-bold',
@@ -163,27 +164,43 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center'
     },
     //#endregion
-    
+
     //#region Home Screen styles
     homeScreenHero: {
         alignItems: 'flex-start',
         backgroundColor: 'pink',
         maxHeight: 365
     },
+    homeScreenHeroCaret: {
+        position: 'absolute',
+        bottom: 17.5,
+        right: 78
+    },
     cardTitleSmall: {
         fontFamily: 'work-sans-medium',
         fontSize: 16,
-        color: colors.darkBrown
+        color: colors.darkBrown,
+        lineHeight: 22
     },
     recipeOfDay: {
         ...card,
         maxWidth: 243,
-        marginRight: 15
+        marginRight: 15,
+        marginBottom: 31
     },
     recipeOfDayImage: {
         borderRadius: borderRadius.child,
         maxWidth: '100%',
         maxHeight: 121
+    },
+    heroCardTall: {
+        ...card,
+        maxWidth: heroCardMaxWidth,
+        marginBottom: 15
+    },
+    heroCardShort: {
+        ...card,
+        maxWidth: heroCardMaxWidth
     }
     //#endregion
 });
