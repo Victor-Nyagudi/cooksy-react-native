@@ -6,9 +6,12 @@ import { faClock, faUtensils } from "@fortawesome/free-solid-svg-icons";
 
 import RecipePrepItem from "./RecipePrepItem";
 
-function RecipePrepInfo() {
+function RecipePrepInfo({ marginBottom = 15 }) {
     return ( 
-        <View style={ globalStyles.recipePrepInfoContainer }>
+        <View style={{
+            flexDirection: 'row',
+            marginBottom: marginBottom
+        }}>
             <RecipePrepItem 
                 icon={ faClock }
                 text={ '50 min' }

@@ -24,7 +24,8 @@ function HomeScreen({ navigation }) {
         }}>
             <ScrollView
                 contentContainerStyle={{
-                    paddingHorizontal: 30
+                    paddingHorizontal: 30,
+                    alignItems: 'flex-start'
                 }}
             >
                 <ScrollView
@@ -84,38 +85,52 @@ function HomeScreen({ navigation }) {
                         </View>
                     </View>
                 </ScrollView>
-                <Text style={globalStyles.lightModeTitleBig}>
-                    Ren{'\u00E9'} Redzepi <Text style={{ fontFamily: 'work-sans-light' }}>recommends</Text>
+
+                <Text style={{
+                    ...globalStyles.lightModeTitleBig,
+                    marginBottom: 16
+                }}>
+                    Ren{'\u00E9'} Redzepi's <Text style={{ fontFamily: 'work-sans-light' }}>recommendation</Text>
                 </Text>
 
-                <View style={globalStyles.card}>
+                <View style={globalStyles.recommendedRecipe}>
                     <Image
-                        style={globalStyles.cardImage}
+                        style={globalStyles.recommendedRecipeImage}
                         source={require('../../assets/images/jpg/chef-cooking.jpg')}
                     />
 
-                    <Text style={globalStyles.cardTitleMedium}>
+                    <Text style={{
+                        ...globalStyles.cardTitleSmall,
+                        fontSize: 18,
+                        marginBottom: 15
+                    }}>
                         Vegan Thai Curry Soup
                     </Text>
 
-                    <Text style={globalStyles.lightModeParagraph}>
+                    <Text style={{
+                        ...globalStyles.lightModeParagraph,
+                        marginBottom: 35
+                    }}>
                         Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
                     </Text>
 
-                    <RecipePrepInfo />
-
-                    <Pressable
-                        style={globalStyles.wideButtonTransparent}
-                        onPress={() => navigation.navigate('My recipes')}
-                    >
-                        <Text style={{
-                            ...globalStyles.wideButtonText,
-                            color: colors.darkBrown
-                        }}>
-                            Browse more recipes
-                        </Text>
-                    </Pressable>
+                    <RecipePrepInfo marginBottom={ 0 }/>
                 </View>
+
+                <Pressable
+                    style={{
+                        ...globalStyles.wideButtonTransparent,
+                        marginBottom: 44
+                    }}
+                    onPress={() => navigation.navigate('My recipes')}
+                >
+                    <Text style={{
+                        ...globalStyles.wideButtonText,
+                        color: colors.darkBrown
+                    }}>
+                        Browse more recipes
+                    </Text>
+                </Pressable>
             </ScrollView>
         </View>
     );

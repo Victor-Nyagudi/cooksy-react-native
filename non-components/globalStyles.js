@@ -34,7 +34,7 @@ export const getColor = (color) => colors[color] ? colors[color] : 'red';
 //#region Inherited styles
 
 const lightModeParagraph = {
-    fontFamily: 'roboto-regular',
+    fontFamily: 'roboto-light',
     fontSize: 16,
     color: colors.darkBrown
 };
@@ -55,7 +55,12 @@ const card = {
     backgroundColor: colors.white,
     borderRadius: borderRadius.parent,
     padding: 25
-}
+};
+
+const recipeImage = {
+    borderRadius: borderRadius.child,
+    maxWidth: '100%'
+};
 
 const heroCardMaxWidth = 244;
 //#endregion
@@ -87,10 +92,6 @@ const globalStyles = StyleSheet.create({
         fontSize: 18,
         color: colors.white,
         textAlign: 'center'
-    },
-    recipePrepInfoContainer: {
-        flexDirection: 'row',
-        marginBottom: 15
     },
     recipePrepInfo: {
         flexDirection: 'row',
@@ -169,7 +170,8 @@ const globalStyles = StyleSheet.create({
     homeScreenHero: {
         alignItems: 'flex-start',
         backgroundColor: 'pink',
-        maxHeight: 365
+        maxHeight: 365,
+        marginBottom: 66
     },
     homeScreenHeroCaret: {
         position: 'absolute',
@@ -189,8 +191,7 @@ const globalStyles = StyleSheet.create({
         marginBottom: 31
     },
     recipeOfDayImage: {
-        borderRadius: borderRadius.child,
-        maxWidth: '100%',
+        ...recipeImage,
         maxHeight: 121
     },
     heroCardTall: {
@@ -201,6 +202,15 @@ const globalStyles = StyleSheet.create({
     heroCardShort: {
         ...card,
         maxWidth: heroCardMaxWidth
+    },
+    recommendedRecipe: { 
+        ...card,
+        marginBottom: 14
+    },
+    recommendedRecipeImage: {
+        ...recipeImage,
+        maxHeight: 187,
+        marginBottom: 16
     }
     //#endregion
 });
