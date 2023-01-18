@@ -9,6 +9,7 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import RecipePrepInfo from "../shared/RecipePrepInfo";
 
 function HomeScreen({ navigation }) {
     return ( 
@@ -26,9 +27,7 @@ function HomeScreen({ navigation }) {
                         Roasted pumpkin soup
                     </Text>
 
-                    <View style={ globalStyles.recipeInfoContainer }>
-                        
-                    </View>
+                    <RecipePrepInfo />
                 </View>
                 
                 <View>
@@ -73,6 +72,8 @@ function HomeScreen({ navigation }) {
                 <Text style={ globalStyles.lightModeParagraph }>
                     Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
                 </Text>
+
+                <RecipePrepInfo />
 
                 <Pressable
                     style={ globalStyles.wideButtonTransparent }
