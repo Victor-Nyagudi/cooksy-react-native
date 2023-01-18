@@ -29,7 +29,7 @@ export const colors = {
     white: 'hsla(0, 0%, 100%, 1.0)' // #FFFFFF
 };
 
-export const getColor = (color) => colors[color] ? colors[color] : 'red'; 
+export const getColor = (color) => colors[color] ? colors[color] : 'red';
 
 //#region Inherited styles
 
@@ -43,10 +43,21 @@ const lightModeTitle = {
     fontFamily: 'work-sans-semi-bold',
     fontSize: 30,
     color: colors.darkBrown
-}
+};
+
+const wideButton = {
+    borderRadius: borderRadius.parent,
+    padding: 13,
+    width: '100%'
+};
 
 //#endregion
 
+/*
+    TODO: Rename global styles to 'lightModeStyles' and
+    TODO: then create and export another stylesheet for
+    TODO: dark mode called 'darkModeStyles'.
+*/
 const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -54,11 +65,30 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.lightModeBackground,
         paddingHorizontal: 30
     },
+    wideButton: {
+        ...wideButton,
+        backgroundColor: colors.darkBrown
+    },
+    wideButtonTransparent: {
+        ...wideButton,
+        borderStyle: 'solid',
+        borderWidth: 2 
+    },
+    wideButtonText: {
+        fontFamily: 'work-sans-semi-bold',
+        fontSize: 18,
+        color: colors.white,
+        textAlign: 'center'
+    },
 
     lightModeBackgroundColor: colors.lightModeBackground,
     darkModeBackgroundColor: colors.darkModeBackground,
     lightModeParagraph: { ...lightModeParagraph },
     lightModeTitle: { ...lightModeTitle },
+    lightModeTitleBig: {
+        ...lightModeTitle,
+        fontSize: 32
+    },
     translucentLightModeParagraph: {
         ...lightModeParagraph,
         color: colors.translucentDarkBrown
@@ -67,7 +97,7 @@ const globalStyles = StyleSheet.create({
         ...lightModeTitle,
         fontFamily: 'work-sans-light'
     },
-    
+
     tabBarContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -88,23 +118,11 @@ const globalStyles = StyleSheet.create({
     tabBarButtonText: { fontFamily: 'nunito-regular' },
     tabBarIcon: { marginBottom: 3.5 },
 
-    introScreenButtonContainer: { 
-        flex: 1, 
-        justifyContent: 'flex-end', 
-        width: '100%', 
+    introScreenButtonContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        width: '100%',
         paddingBottom: 30
-    },
-    introScreenButton: {
-        backgroundColor: colors.darkBrown,
-        borderRadius: borderRadius.parent,
-        padding: 13,
-        width: '100%'
-    },
-    introScreenButtonText: {
-        fontFamily: 'work-sans-semi-bold',
-        fontSize: 18,
-        color: colors.white,
-        textAlign: 'center'
     },
     intoScreenIllustration: { marginBottom: 50 },
     introScreenSubHeading: {
@@ -113,10 +131,10 @@ const globalStyles = StyleSheet.create({
         color: 'hsla(342, 30%, 8%, .9)', // * <- Just dark brown at 90% opacity
         textAlign: 'center'
     },
-    introScreenContent: { 
-        flex: 1, 
+    introScreenContent: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center' 
+        justifyContent: 'center'
     }
 });
 

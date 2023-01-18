@@ -8,6 +8,7 @@ import IntroScreen from './components/screens/IntroScreen';
 import HomeTabNavigation from "./components/shared/HomeTabNavigation";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import recipes from "./data.json";
 
 
 const Stack = createNativeStackNavigator();

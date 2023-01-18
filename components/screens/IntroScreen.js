@@ -51,10 +51,10 @@ function IntroScreen({ navigation }) {
                 
             <View style={ globalStyles.introScreenButtonContainer }>
                 <Pressable 
-                    style={ globalStyles.introScreenButton }
+                    style={ globalStyles.wideButton }
                     onPress={ () => navigation.navigate('Home') }
                 >
-                    <Text style={ globalStyles.introScreenButtonText }>
+                    <Text style={ globalStyles.wideButtonText }>
                         Let's start
                     </Text>
                 </Pressable>
