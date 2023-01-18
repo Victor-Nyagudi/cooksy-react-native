@@ -26,6 +26,7 @@ export default function App() {
     'roboto-medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
     'roboto-bold': require('./assets/fonts/roboto/Roboto-Bold.ttf'),
 
+    'work-sans-extra-light': require('./assets/fonts/work-sans/WorkSans-ExtraLight.ttf'),
     'work-sans-light': require('./assets/fonts/work-sans/WorkSans-Light.ttf'),
     'work-sans-regular': require('./assets/fonts/work-sans/WorkSans-Regular.ttf'),
     'work-sans-medium': require('./assets/fonts/work-sans/WorkSans-Medium.ttf'),

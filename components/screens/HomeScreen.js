@@ -17,9 +17,11 @@ import RecipePrepInfo from "../shared/RecipePrepInfo";
 function HomeScreen({ navigation }) {
     const insets = useSafeAreaInsets();
 
+    const extraLightFontFamily = 'work-sans-extra-light';
+
     return (
         <View style={{
-            backgroundColor: colors.lightModeBackground,
+            ...globalStyles.homeScreenScrollContainer,
             paddingBottom: insets.bottom
         }}>
             <ScrollView
@@ -38,7 +40,7 @@ function HomeScreen({ navigation }) {
                             ...globalStyles.lightModeTitleBig,
                             marginBottom: 26
                         }}>
-                            Recipe {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>of the day</Text>
+                            Recipe {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>of the day</Text>
                         </Text>
 
                         <Text style={{
@@ -59,7 +61,7 @@ function HomeScreen({ navigation }) {
                     <View style={{ paddingTop: 31 }}>
                         <View style={globalStyles.heroCardTall}>
                             <Text style={globalStyles.lightModeTitleBig}>
-                                Cook {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>like a pro</Text>
+                                Cook {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>like a pro</Text>
                             </Text>
 
                             <Pressable
@@ -80,7 +82,7 @@ function HomeScreen({ navigation }) {
 
                         <View style={globalStyles.heroCardShort}>
                             <Text style={globalStyles.lightModeTitleBig}>
-                                Check {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>new updates</Text>
+                                Check {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>new updates</Text>
                             </Text>
                         </View>
                     </View>
@@ -90,7 +92,7 @@ function HomeScreen({ navigation }) {
                     ...globalStyles.lightModeTitleBig,
                     marginBottom: 16
                 }}>
-                    Ren{'\u00E9'} Redzepi's <Text style={{ fontFamily: 'work-sans-light' }}>recommendation</Text>
+                    Ren{'\u00E9'} Redzepi's <Text style={{ fontFamily: 'work-sans-extra-light' }}>recommendation</Text>
                 </Text>
 
                 <View style={globalStyles.recommendedRecipe}>

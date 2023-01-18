@@ -173,9 +173,13 @@ const globalStyles = StyleSheet.create({
     //#endregion
 
     //#region Home Screen styles
+    homeScreenScrollContainer: {
+        backgroundColor: colors.lightModeBackground,
+        paddingTop: 50
+    },
     homeScreenHero: {
         alignItems: 'flex-start',
-        backgroundColor: 'pink',
+        // backgroundColor: 'pink',
         maxHeight: 365,
         marginBottom: 66
     },
