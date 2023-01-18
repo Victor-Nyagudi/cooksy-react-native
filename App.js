@@ -37,6 +37,11 @@ export default function App() {
     return null;
 
   return (
+    /*
+      * All screens seem to have the light mode background color
+      * somehow even though I don't remember applying it somewhere.
+      * Worth looking into.
+    */
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{

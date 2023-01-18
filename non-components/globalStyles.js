@@ -51,6 +51,12 @@ const wideButton = {
     width: '100%'
 };
 
+const card = {
+    backgroundColor: colors.white,
+    borderRadius: borderRadius.parent,
+    padding: 25
+}
+
 //#endregion
 
 /*
@@ -59,6 +65,7 @@ const wideButton = {
     TODO: dark mode called 'darkModeStyles'.
 */
 const globalStyles = StyleSheet.create({
+    //#region Shared
     container: {
         flex: 1,
         alignItems: 'center',
@@ -80,7 +87,13 @@ const globalStyles = StyleSheet.create({
         color: colors.white,
         textAlign: 'center'
     },
+    recipePrepInfo: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    //#endregion
 
+    //#region Miscellaneous
     lightModeBackgroundColor: colors.lightModeBackground,
     darkModeBackgroundColor: colors.darkModeBackground,
     lightModeParagraph: { ...lightModeParagraph },
@@ -97,7 +110,9 @@ const globalStyles = StyleSheet.create({
         ...lightModeTitle,
         fontFamily: 'work-sans-light'
     },
+    //#endregion
 
+    //#region  Tab bar styles
     tabBarContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -117,7 +132,9 @@ const globalStyles = StyleSheet.create({
     },
     tabBarButtonText: { fontFamily: 'nunito-regular' },
     tabBarIcon: { marginBottom: 3.5 },
+    //#endregion
 
+    //#region Intro screen styles
     introScreenButtonContainer: {
         flex: 1,
         justifyContent: 'flex-end',
@@ -135,7 +152,24 @@ const globalStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    //#endregion
+    
+    //#region Home Screen styles
+    cardTitleSmall: {
+        fontFamily: 'work-sans-medium',
+        fontSize: 16,
+        color: colors.darkBrown
+    },
+    recipeOfDay: {
+        ...card,
+        maxWidth: 243,
+        marginRight: 15
+    },
+    recipeOfDayImage: {
+        maxWidth: '100%'
     }
+    //#endregion
 });
 
 export default globalStyles;

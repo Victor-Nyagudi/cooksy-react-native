@@ -4,24 +4,20 @@ import globalStyles from "../../non-components/globalStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock, faUtensils } from "@fortawesome/free-solid-svg-icons";
 
+import RecipePrepItem from "./RecipePrepItem";
+
 function RecipePrepInfo() {
     return ( 
-        <View style={ globalStyles.recipePrepInfo }>
-            <View>
-                <FontAwesomeIcon icon={ faClock }/>
-
-                <Text>
-                    50 min
-                </Text>
-            </View>
+        <View style={{ flexDirection: 'row' }}>
+            <RecipePrepItem 
+                icon={ faClock }
+                text={ '50 min' }
+            />
             
-            <View>
-                <FontAwesomeIcon icon={ faUtensils } />
-
-                <Text>
-                    4 ppl
-                </Text>
-            </View>
+            <RecipePrepItem 
+                icon={ faUtensils }
+                text={ '4 ppl' }
+            />
         </View>
     );
 }

@@ -9,85 +9,107 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import RecipePrepInfo from "../shared/RecipePrepInfo";
 
 function HomeScreen({ navigation }) {
+    const insets = useSafeAreaInsets();
+
     return ( 
-        <ScrollView>
+        <View style={{
+            backgroundColor: colors.lightModeBackground,
+            paddingBottom: insets.bottom
+        }}>
             <ScrollView 
-                horizontal
-                style={ globalStyles.homeScreenHero }
+                contentContainerStyle={{ paddingHorizontal: 30 }}
             >
-                <View style={ globalStyles.recipeOfDay }>
-                    <Text style={ globalStyles.lightModeTitleBig }>
-                        Recipe <Text style={{ fontFamily: 'work-sans-light' }}>of the day</Text>
+                <ScrollView 
+                    horizontal
+                    contentContainerStyle={ globalStyles.homeScreenHero }
+                >
+                    <View style={ globalStyles.recipeOfDay }>
+                        <Text style={{
+                            ...globalStyles.lightModeTitleBig,
+                            marginBottom: 28
+                        }}>
+                            Recipe {'\n'}<Text style={{ fontFamily: 'work-sans-light' }}>of the day</Text>
+                        </Text>
+
+                        <Text style={{
+                            ...globalStyles.cardTitleSmall,
+                            marginBottom: 7
+                        }}>
+                            Roasted pumpkin soup
+                        </Text>
+
+                        <RecipePrepInfo />
+
+                        <Image 
+                            source={ require('../../assets/images/jpg/pumpkins.jpg') }
+                            style={ globalStyles.recipeOfDayImage }
+                        />
+                    </View>
+                    
+                    <View>
+                        <View style={ globalStyles.heroCardTall }>
+                            <Text style={ globalStyles.lightModeTitleBig }>
+                                Cook <Text style={{ fontFamily: 'work-sans-light' }}>like a pro</Text>
+                            </Text>
+
+                            <Pressable
+                                onPress={ () => console.log('This is a dummy link.') }
+                            >
+                                <Text style={ globalStyles.cardTitleSmall }>
+                                    Thermomix{'\u00AE'} advanced tips and tricks
+                                </Text>
+
+                                <FontAwesomeIcon icon={ faAngleRight } />
+                            </Pressable>
+                        </View>
+                        
+                        <View style={ globalStyles.heroCardShort }>
+                            <Text style={ globalStyles.lightModeTitleBig }>
+                                    Check <Text style={{ fontFamily: 'work-sans-light' }}>new updates</Text>
+                            </Text>
+                        </View>
+                    </View>
+                </ScrollView>
+                <Text style={ globalStyles.lightModeTitleBig }>
+                    Ren{'\u00E9'} Redzepi <Text style={{ fontFamily: 'work-sans-light' }}>recommends</Text>
+                </Text>
+
+                <View style={ globalStyles.card }>
+                    <Image 
+                        style={ globalStyles.cardImage }
+                        source={ require('../../assets/images/jpg/chef-cooking.jpg') }
+                    />
+
+                    <Text style={ globalStyles.cardTitleMedium }>
+                        Vegan Thai Curry Soup
                     </Text>
 
-                    <Text style={ globalStyles.cardTitleSmall }>
-                        Roasted pumpkin soup
+                    <Text style={ globalStyles.lightModeParagraph }>
+                        Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
                     </Text>
 
                     <RecipePrepInfo />
-                </View>
-                
-                <View>
-                    <View style={ globalStyles.heroCardTall }>
-                        <Text style={ globalStyles.lightModeTitleBig }>
-                            Cook <Text style={{ fontFamily: 'work-sans-light' }}>like a pro</Text>
-                        </Text>
 
-                        <Pressable
-                            onPress={ () => console.log('This is a dummy link.') }
-                        >
-                            <Text style={ globalStyles.cardTitleSmall }>
-                                Thermomix{'\u00AE'} advanced tips and tricks
-                            </Text>
-
-                            <FontAwesomeIcon icon={ faAngleRight } />
-                        </Pressable>
-                    </View>
-                    
-                    <View style={ globalStyles.heroCardShort }>
-                        <Text style={ globalStyles.lightModeTitleBig }>
-                                Check <Text style={{ fontFamily: 'work-sans-light' }}>new updates</Text>
+                    <Pressable
+                        style={ globalStyles.wideButtonTransparent }
+                        onPress={ () => navigation.navigate('My recipes') }
+                    >
+                        <Text style={{
+                            ...globalStyles.wideButtonText,
+                            color: colors.darkBrown
+                        }}>
+                            Browse more recipes
                         </Text>
-                    </View>
+                    </Pressable>
                 </View>
             </ScrollView>
-
-            <Text style={ globalStyles.lightModeTitleBig }>
-                Ren{'\u00E9'} Redzepi <Text style={{ fontFamily: 'work-sans-light' }}>recommends</Text>
-            </Text>
-
-            <View style={ globalStyles.card }>
-                <Image 
-                    style={ globalStyles.cardImage }
-                    source={ require('../../assets/images/jpg/chef-cooking.jpg') }
-                />
-
-                <Text style={ globalStyles.cardTitleMedium }>
-                    Vegan Thai Curry Soup
-                </Text>
-
-                <Text style={ globalStyles.lightModeParagraph }>
-                    Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
-                </Text>
-
-                <RecipePrepInfo />
-
-                <Pressable
-                    style={ globalStyles.wideButtonTransparent }
-                    onPress={ () => navigation.navigate('My recipes') }
-                >
-                    <Text style={{
-                        ...globalStyles.wideButtonText,
-                        color: colors.darkBrown
-                    }}>
-                        Browse more recipes
-                    </Text>
-                </Pressable>
-            </View>
-        </ScrollView>
+        </View>
     );
 }
 
