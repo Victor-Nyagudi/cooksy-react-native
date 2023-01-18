@@ -1,12 +1,19 @@
-import { View, Text } from "react-native";
-import globalStyles from "../../non-components/globalStyles";
+import globalStyles, { colors } from "../../non-components/globalStyles";
+
+import { View } from "react-native";
+import RecipesColumn from "../RecipesColumn";
 
 function RecipesScreen() {
+    const recipes = [];
+
     return ( 
-        <View>
-            <Text style={ globalStyles.lightModeTitle }>
-                This is the recipes screen.
-            </Text>
+        <View style={{
+            ...globalStyles.container,
+            alignItems: 'flex-start'
+        }}>
+            <RecipesColumn />
+            
+            <RecipesColumn />
         </View>
     );
 }

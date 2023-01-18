@@ -6,7 +6,7 @@ import { faClock, faUtensils } from "@fortawesome/free-solid-svg-icons";
 
 import RecipePrepItem from "./RecipePrepItem";
 
-function RecipePrepInfo({ marginBottom = 15 }) {
+function RecipePrepInfo({ marginBottom = 15, prepTimeInMinutes = 45, numberOfServings = 3 }) {
     return ( 
         <View style={{
             flexDirection: 'row',
@@ -14,13 +14,13 @@ function RecipePrepInfo({ marginBottom = 15 }) {
         }}>
             <RecipePrepItem 
                 icon={ faClock }
-                text={ '50 min' }
+                text={ `${prepTimeInMinutes} min` }
                 marginRight={ 12 }
             />
             
             <RecipePrepItem 
                 icon={ faUtensils }
-                text={ '4 ppl' }
+                text={ `${numberOfServings} ppl` }
             />
         </View>
     );

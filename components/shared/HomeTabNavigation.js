@@ -18,9 +18,9 @@ function HomeTabNavigation() {
         >
             <Tab.Screen name="Inspirations" component={ HomeScreen }/>
 
-            <Tab.Screen name="My recipes" component={ RecipesScreen } />
+            <Tab.Screen name="My Recipes" component={ RecipesScreen } />
 
-            <Tab.Screen name="Cook now!" component={ CookingScreen } />
+            <Tab.Screen name="Cook Now!" component={ CookingScreen } />
 
             <Tab.Screen name="Settings" component={ SettingsScreen } />
         </Tab.Navigator>

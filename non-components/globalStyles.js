@@ -186,7 +186,7 @@ const globalStyles = StyleSheet.create({
     homeScreenHeroCaret: {
         position: 'absolute',
         bottom: 17.5,
-        right: 78
+        right: 74
     },
     cardTitleSmall: {
         fontFamily: 'work-sans-medium',
@@ -222,6 +222,10 @@ const globalStyles = StyleSheet.create({
         maxHeight: 187,
         marginBottom: 16
     }
+    //#endregion
+
+    //#region My Recipes styles
+    
     //#endregion
 });
 
