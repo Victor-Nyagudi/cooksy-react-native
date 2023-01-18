@@ -36,7 +36,7 @@ function IntroScreen({ navigation }) {
                     textAlign: 'center',
                     marginBottom: 12 
                 }}>
-                    All the recipes on your fingertips
+                    All the recipes at your fingertips
                 </Text>
 
                 {/* 
