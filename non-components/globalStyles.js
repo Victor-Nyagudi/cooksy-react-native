@@ -121,9 +121,14 @@ const globalStyles = StyleSheet.create({
         ...lightModeTitle,
         fontFamily: 'work-sans-light'
     },
+    debugBorder: {
+        borderStyle: 'solid',
+        borderColor: 'red',
+        borderWidth: 1.5
+    },
     //#endregion
 
-    //#region  Tab bar styles
+    //#region Tab bar styles
     tabBarContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -221,11 +226,24 @@ const globalStyles = StyleSheet.create({
         ...recipeImage,
         maxHeight: 187,
         marginBottom: 16
-    }
+    },
     //#endregion
 
-    //#region My Recipes styles
-    
+    //#region My Recipes Screen styles
+    recipeCards: {
+    },  
+    recipeCard: {
+        ...card,
+        // backgroundColor: 'pink',
+        padding: 10,
+        maxWidth: '47.75%',
+        marginBottom: 15,
+    },
+    recipeImage: {
+        ...recipeImage,
+        height: 92.75,
+        marginBottom: 10
+    }
     //#endregion
 });
 

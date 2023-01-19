@@ -26,7 +26,7 @@ function HomeScreen({ navigation }) {
         }}>
             <ScrollView
                 contentContainerStyle={{
-                    paddingHorizontal: 30,
+                    paddingHorizontal: 25,
                     alignItems: 'flex-start'
                 }}
             >
@@ -124,7 +124,7 @@ function HomeScreen({ navigation }) {
                         ...globalStyles.wideButtonTransparent,
                         marginBottom: 44
                     }}
-                    onPress={() => navigation.navigate('My recipes')}
+                    onPress={() => navigation.navigate('My Recipes')}
                 >
                     <Text style={{
                         ...globalStyles.wideButtonText,
