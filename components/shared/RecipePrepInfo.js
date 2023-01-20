@@ -20,7 +20,7 @@ function RecipePrepInfo({ marginBottom = 15, prepTimeInMinutes = 45, numberOfSer
             
             <RecipePrepItem 
                 icon={ faUtensils }
-                text={ `${numberOfServings} ppl` }
+                text={ `${numberOfServings} ${ numberOfServings > 1 ? 'ppl' : 'pers' }` }
             />
         </View>
     );
