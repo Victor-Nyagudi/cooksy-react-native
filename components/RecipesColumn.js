@@ -10,9 +10,62 @@ function RecipesColumn({
     rowGap,
     recipeColumnMaxWidth 
 }) {
-    const images = {
-
-    }
+    /*
+        * Trying to use a dynamic string for 'require()'
+        * proved futile, so I resorted to another way that
+        * feels like a good one - storing the image inside
+        * an object with an 'id' property then using that to
+        * fetch the image. My guess is that when using a 
+        * database, this will lead to two trips - one to get
+        * the recipe and another to a different column/collection/etc. 
+        * in the database to get the image.
+    */
+    const images = [
+        {
+            id: 1,
+            image: require('../assets/images/jpg/veggie-breakfast.jpg')
+        },
+        {
+            id: 2,
+            image: require('../assets/images/jpg/cheese-and-meat.jpg')
+        },
+        {
+            id: 3,
+            image: require('../assets/images/jpg/dessert.jpg')
+        },
+        {
+            id: 4,
+            image: require('../assets/images/jpg/italian-pasta.jpg')
+        },
+        {
+            id: 5,
+            image: require('../assets/images/jpg/omelette.jpg')
+        },
+        {
+            id: 6,
+            image: require('../assets/images/jpg/pastries.jpg')
+        },
+        {
+            id: 7,
+            image: require('../assets/images/jpg/pie.jpg')
+        },
+        {
+            id: 8,
+            image: require('../assets/images/jpg/pumpkins.jpg')
+        },
+        {
+            id: 9,
+            image: require('../assets/images/jpg/sushi.jpg')
+        },
+        {
+            id: 10,
+            image: require('../assets/images/jpg/teriyaki.jpg')
+        },
+        {
+            id: 11,
+            image: require('../assets/images/jpg/soup.jpg')
+        }
+    ];
 
     return ( 
         <View style={{ 
@@ -22,11 +75,6 @@ function RecipesColumn({
         }}>
             {
                 recipes.map(recipe => {
-                    // const imageUrl = recipe.imageUrl;
-                    
-                    // const image = require(imageUrl);
-                    // console.log(typeof imageUrl);
-
                     return (
                         <View 
                             key={ recipe.id }
@@ -35,7 +83,7 @@ function RecipesColumn({
                             marginBottom: rowGap
                         }}>
                             <Image 
-                                source={ require('../assets/images/jpg/teriyaki.jpg') } // * <- Investigate why this might be bad based on docs
+                                source={ images.filter(image => image.id === recipe.imageId)[0].image } // * <- Investigate why this might be bad based on docs
                                 style={ globalStyles.recipeImage }
                             />
             
