@@ -2,7 +2,7 @@ import globalStyles from "../../non-components/globalStyles";
 
 import React, { useState } from 'react';
 
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import RecipesColumn from "../RecipesColumn";
 
 function RecipesScreen() {
@@ -99,19 +99,66 @@ function RecipesScreen() {
         },
     ]);
 
+    const [recipesContainerWidth, setRecipesContainerWidth] = useState(null);
+    
+    const recipeColumnMaxWidth = 
+        recipesContainerWidth ? .48 * recipesContainerWidth
+        : '100%';
+
     /*
-        * The flatlist with two columns renders all the odd
-        * numbered items on the left and even-numbered ones
-        * on the right. That being said, the second item will
-        * have some extra margin above it so that it pushes down
-        * the entire second column.
-    */
+        * As calculated above, each column will take up 48% of
+        * of the parent container's max width (96% in total), so the
+        * gap between them will be 4% of the width which will then be
+        * used to determine the 'marginBottom' applied to each recipe
+        * card (like a pseudo 'rowGap') for consistency across varying
+        * device widths. 10 is the height between the cards in the design, 
+        * so I'm using it as a default value.
+    */        
+    const rowGap = 
+        recipesContainerWidth ? .04 * recipesContainerWidth
+        : 10;
+
     return ( 
         <View style={{
             ...globalStyles.container,
             paddingHorizontal: 20
         }}>
-            <RecipesColumn recipes={ recipes } />
+            {/* 
+                I iniitally went with a 'FlatList', but there are some
+                limitations in styling multiple columns such that the
+                height of all the items inside it should be the same.
+                This wasn't going to work since the design has items 
+                with different heights. With a 'FlatList', the larger item
+                in a row would enlarge it thereby stretching the adjacent 
+                recipe card in order to fill remaining space. Using 
+                'alignItems: 'flex-start'/'center'/'flex-end'' helps a little, 
+                but the vertical spacing between cards becomes inconsistent.
+                
+                'ScrollView' works for now, but further investigation is needed
+                for more clarity should a scenario arise where a 'FlatList' is 
+                required because there are many recipes to render (or just talk a 
+                designer and ask them to change the design to improve performance).
+                I also tried using two 'FlatLists' - one for each column, but
+                this resulted in each column scrolling independently. 
+            */}
+
+            <ScrollView 
+                showsVerticalScrollIndicator={ false }
+                contentContainerStyle={ globalStyles.recipeColumnsContainer }
+            >
+                    <RecipesColumn 
+                        recipes={ recipes.filter(recipe => recipe.id % 2 == 1) }
+                        rowGap={ rowGap }
+                        recipeColumnMaxWidth={ recipeColumnMaxWidth }
+                    />
+                    
+                    <RecipesColumn 
+                        recipes={ recipes.filter(recipe => recipe.id % 2 == 0) }
+                        rowGap={ rowGap }
+                        recipeColumnMaxWidth={ recipeColumnMaxWidth }
+                        marginTop={ 37 }
+                    />
+            </ScrollView>
         </View>
     );
 }

@@ -230,14 +230,18 @@ const globalStyles = StyleSheet.create({
     //#endregion
 
     //#region My Recipes Screen styles
-    recipeCards: {
+    recipeColumnsContainer: {
+        flexDirection: 'row',
+        backgroundColor: 'red',
+        width: '100%',
+        justifyContent: 'space-between' ,
+        paddingTop: 20,
+        paddingBottom: 69
     },  
     recipeCard: {
         ...card,
-        // backgroundColor: 'pink',
-        padding: 10,
-        maxWidth: '47.75%',
-        marginBottom: 15,
+        backgroundColor: 'pink',
+        padding: 10
     },
     recipeImage: {
         ...recipeImage,
