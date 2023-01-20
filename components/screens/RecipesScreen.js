@@ -14,7 +14,8 @@ function RecipesScreen() {
             "description": "A special blend of vegetables mixed with a hint of citrus for that tangy taste to get you going in the morning. Keep your waist trim and calories low with this light, healthy breakfast.",
             "prepTimeInMinutes": 12,
             "numberOfServings": 3,
-            "imageId": 1
+            "imageId": 1,
+            "imageUri": "https://source.unsplash.com/IGfIGP5ONV0"
         },
         {
             "id": 2,
@@ -23,7 +24,8 @@ function RecipesScreen() {
             "description": "What do cheese and meat have in common? The answer won't matter once you're done with this dish of glazed ham with your pick of mozzarella or Swiss cheese. We threw in a tomato to ease the guilt.",
             "prepTimeInMinutes": 15,
             "numberOfServings": 4,
-            "imageId": 2
+            "imageId": 2,
+            "imageUri": "https://source.unsplash.com/rgeBbAgKB8A"
         },
         {
             "id": 3,
@@ -32,7 +34,8 @@ function RecipesScreen() {
             "description": "Did you know white chocolate isn't actually chocolate? That's too bad because we love it anyway! Savor the smooth 'chocolatiness' along with a rich caramel blend in this chocolate mousse souffle.",
             "prepTimeInMinutes": 35,
             "numberOfServings": 2,
-            "imageId": 3
+            "imageId": 3,
+            "imageUri": "https://source.unsplash.com/mLtIBNInDGY"
         },
         {
             "id": 4,
@@ -41,7 +44,8 @@ function RecipesScreen() {
             "description": "Simplicity is the ulitmate sophistication, and that's exactly what you get with this Italian pasta recipe. Mixed with cayenne pepper, green onions, and Orion sauce, pasta has never tasted so good.",
             "prepTimeInMinutes": 32,
             "numberOfServings": 5,
-            "imageId": 4
+            "imageId": 4,
+            "imageUri": "https://source.unsplash.com/s0duM7x1yuA"
         },
         {
             "id": 5,
@@ -50,7 +54,8 @@ function RecipesScreen() {
             "description": "Journey to North Africa's heart with this tasty Moroccan Omelette. Made from the Algerian nuthatch's eggs and Rabat's world-famous spices, one serving is never enough.",
             "prepTimeInMinutes": 15,
             "numberOfServings": 1,
-            "imageId": 5
+            "imageId": 5,
+            "imageUri": "https://source.unsplash.com/yGrDYmXTGh4"
         },
         {
             "id": 6,
@@ -59,7 +64,8 @@ function RecipesScreen() {
             "description": "These fun-sized treats are perfect for occasions when you have lots of people but not much energy left for dessert. Slot these babies in the oven in just 15 minutes and let the heat do the rest.",
             "prepTimeInMinutes": 40,
             "numberOfServings": 6,
-            "imageId": 6
+            "imageId": 6,
+            "imageUri": "https://source.unsplash.com/VctkjZHOqlo"
         },
         {
             "id": 7,
@@ -68,7 +74,8 @@ function RecipesScreen() {
             "description": "Who says you have to be American to enjoy some apple pie? Made from mountain honey instead of processed sugar, get the best of both worlds with this low-calorie pie even the stars and stripes would be proud of.",
             "prepTimeInMinutes": 55,
             "numberOfServings": 8,
-            "imageId": 7
+            "imageId": 7,
+            "imageUri": "https://source.unsplash.com/yxLFMqYH1BY"
         },
         {
             "id": 8,
@@ -77,7 +84,8 @@ function RecipesScreen() {
             "description": "Get the most out of those pumpkins this Halloween with this roasted pumpkin soup recipe. A touch of cinammon and a splash of kiwi leaves a delicious aftertaste that will haunt your forever.",
             "prepTimeInMinutes": 25,
             "numberOfServings": 3,
-            "imageId": 8
+            "imageId": 8,
+            "imageUri": "https://source.unsplash.com/jVC2j2T3IRY"
         },
         {
             "id": 9,
@@ -86,7 +94,8 @@ function RecipesScreen() {
             "description": "A perfect meal for a date night or dinner for two. The rolling might take some time to get right, but once you do, you'll be cooking like Yamamoto's your middle name.",
             "prepTimeInMinutes": 18,
             "numberOfServings": 2,
-            "imageId": 9
+            "imageId": 9,
+            "imageUri": "https://source.unsplash.com/QcQ_9WxQFC0"
         },
         {
             "id": 10,
@@ -95,7 +104,8 @@ function RecipesScreen() {
             "description": "Take a break from your favorite avian with some teriyaki duck. This dish is prepared in the traditional way by mixing and heating soy sauce, sake (alcoholic Japanese beverage), and sugar for a marinating sauce then grilling the meat.",
             "prepTimeInMinutes": 40,
             "numberOfServings": 3,
-            "imageId": 10
+            "imageId": 10,
+            "imageUri": "https://source.unsplash.com/4CJ9AWZT7FM"
         },
         {
             "id": 11,
@@ -104,7 +114,8 @@ function RecipesScreen() {
             "description": "Thai soup is commonly served in 5-star restaurants all over the world, so we brought the 5-star restaurants to you. The orange finish tastes just as good as it looks, so take a dip, and taste what you've been missing.",
             "prepTimeInMinutes": 15,
             "numberOfServings": 1,
-            "imageId": 11
+            "imageId": 11,
+            "imageUri": "https://source.unsplash.com/fxJTl_gDh28"
         }
     ]);
 
