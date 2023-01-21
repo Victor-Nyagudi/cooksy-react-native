@@ -1,21 +1,27 @@
 import { View, Text, Pressable } from "react-native";
-import globalStyles from "../../non-components/globalStyles";
+import globalStyles, { colors } from "../../non-components/globalStyles";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import LightModeIllustration from "../miscellaneous/LightModeIllustration";
-// TODO: import DarkModeIllustration from "../miscellaneous/Dark";
+import DarkModeIllustration from "../miscellaneous/DarkModeIllustration";
 
+import { useContext } from "react";
+import { ThemeContext } from "../../non-components/globalStyles";
 
 function IntroScreen({ navigation }) {
     const insets = useSafeAreaInsets();
+    const themeContext = useContext(ThemeContext);
 
     return ( 
         <View style={{
             ...globalStyles.container,
             justifyContent: 'space-between',
             paddingTop: insets.top,
-            paddingBottom: insets.bottom
+            paddingBottom: insets.bottom,
+            backgroundColor: themeContext.darkModeEnabled 
+                ? colors.darkModeBackground
+                : colors.lightModeBackground
         }}>
             <View style={{ flex: 1 }}>
                 {/* 
@@ -28,13 +34,22 @@ function IntroScreen({ navigation }) {
 
             <View style={ globalStyles.introScreenContent }>
                 <View style={ globalStyles.intoScreenIllustration }>
-                    <LightModeIllustration />
+                    {
+                        themeContext.darkModeEnabled 
+
+                        ? <DarkModeIllustration />
+
+                        : <LightModeIllustration />
+                    }
                 </View>
 
                 <Text style={{ 
                     ...globalStyles.lightModeTitle,
                     textAlign: 'center',
-                    marginBottom: 12 
+                    marginBottom: 12,
+                    color: themeContext.darkModeEnabled
+                        ? colors.white
+                        : colors.darkBrown 
                 }}>
                     All the recipes at your fingertips
                 </Text>
@@ -44,17 +59,33 @@ function IntroScreen({ navigation }) {
                     trademark symbol in React Native.
                     https://reactnativecode.com/add-show-copyright-symbol-icon/
                 */}
-                <Text style={ globalStyles.introScreenSubHeading }>
+                <Text 
+                    style={{
+                        ...globalStyles.introScreenSubHeading,
+                        color: themeContext.darkModeEnabled
+                            ? colors.grey
+                            : 'hsla(342, 30%, 8%, .9)'
+                    }}>
                     Cooking on Thermomix<Text style={ globalStyles.superscript }>{'\u00AE'}</Text> made easy
                 </Text>
             </View>
                 
             <View style={ globalStyles.introScreenButtonContainer }>
                 <Pressable 
-                    style={ globalStyles.wideButton }
+                    style={{
+                        ...globalStyles.wideButton,
+                        backgroundColor: themeContext.darkModeEnabled
+                            ? colors.white
+                            : colors.darkBrown
+                    }}
                     onPress={ () => navigation.navigate('Home') }
                 >
-                    <Text style={ globalStyles.wideButtonText }>
+                    <Text style={{
+                        ...globalStyles.wideButtonText,
+                        color: themeContext.darkModeEnabled
+                            ? colors.darkModeBackground
+                            : colors.white
+                    }}>
                         Let's start
                     </Text>
                 </Pressable>

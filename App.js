@@ -8,9 +8,9 @@ import IntroScreen from './components/screens/IntroScreen';
 import HomeTabNavigation from "./components/shared/HomeTabNavigation";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import recipes from "./data.json";
+import React, { useState } from 'react';
 
-import React, { useState, useContext } from 'react';
+import { StatusBar } from "expo-status-bar";
 
 
 const Stack = createNativeStackNavigator();
@@ -63,17 +63,23 @@ export default function App() {
       * Worth looking into.
     */
       <SafeAreaProvider>
+        <StatusBar style={ theme.darkModeEnabled ? "light" : "dark" } />
+
         <NavigationContainer>
           <ThemeContext.Provider value={ theme }>
             <Stack.Navigator screenOptions={{
               headerStyle: {
-                backgroundColor: globalStyles.lightModeBackgroundColor,
+                backgroundColor: theme.darkModeEnabled 
+                  ? globalStyles.darkModeBackgroundColor
+                  : globalStyles.lightModeBackgroundColor
               },
               headerShadowVisible: false,
               headerTitleStyle: {
                 fontFamily: 'work-sans-semi-bold',
                 fontSize: 24,
-                color: colors.darkBrown
+                color: theme.darkModeEnabled
+                  ? colors.white
+                  : colors.darkBrown
               },
               headerTitleAlign: 'center',
             }}>
