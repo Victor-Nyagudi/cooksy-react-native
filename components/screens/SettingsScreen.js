@@ -1,6 +1,6 @@
-import globalStyles, { colors, ThemeContext } from "../../non-components/globalStyles";
+import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { Text, View, Switch } from "react-native";
 
@@ -25,8 +25,8 @@ function SettingsScreen() {
                 <Switch 
                     // thumbColor={ colors.white }
                     // trackColor={{ false: 'grey' , true: colors.darkBrown }}
-                    value={ themeContext.darkModeEnabled }
-                    onValueChange={ themeContext.toggleDarkMode }
+                    value={ themeContext.theme.darkModeEnabled }
+                    onValueChange={ themeContext.theme.toggleDarkMode }
                 />
                     
             </View>

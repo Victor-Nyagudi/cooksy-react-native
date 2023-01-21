@@ -25,6 +25,7 @@ export const colors = {
     offWhite: 'hsla(30, 17%, 95%, 1.0)', // #F5F3F1
     darkBrown: 'hsla(342, 30%, 8%, 1.0)', // #1C0F13
     translucentDarkBrown: 'hsla(342, 30%, 8%, 0.65)', // #1C0F13
+    partialOpacityDarkBrown: 'hsla(342, 30%, 8%, .9)',
 
     // * Shared
     white: 'hsla(0, 0%, 100%, 1.0)' // #FFFFFF
@@ -166,7 +167,7 @@ const globalStyles = StyleSheet.create({
     introScreenSubHeading: {
         fontFamily: 'nunito-regular',
         fontSize: 17,
-        color: 'hsla(342, 30%, 8%, .9)', // * <- Just dark brown at 90% opacity
+        color: colors.partialOpacityDarkBrown,
         textAlign: 'center'
     },
     introScreenContent: {

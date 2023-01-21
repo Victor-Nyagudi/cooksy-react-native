@@ -19,9 +19,7 @@ function IntroScreen({ navigation }) {
             justifyContent: 'space-between',
             paddingTop: insets.top,
             paddingBottom: insets.bottom,
-            backgroundColor: themeContext.darkModeEnabled 
-                ? colors.darkCharcoalGrey
-                : colors.offWhite
+            backgroundColor: themeContext.themeColors.backgroundColor
         }}>
             <View style={{ flex: 1 }}>
                 {/* 
@@ -35,7 +33,7 @@ function IntroScreen({ navigation }) {
             <View style={ globalStyles.introScreenContent }>
                 <View style={ globalStyles.intoScreenIllustration }>
                     {
-                        themeContext.darkModeEnabled 
+                        themeContext.theme.darkModeEnabled 
 
                         ? <DarkModeIllustration />
 
@@ -47,9 +45,7 @@ function IntroScreen({ navigation }) {
                     ...globalStyles.lightModeTitle,
                     textAlign: 'center',
                     marginBottom: 12,
-                    color: themeContext.darkModeEnabled
-                        ? colors.white
-                        : colors.darkBrown 
+                    color: themeContext.themeColors.whiteOrDarkBrown 
                 }}>
                     All the recipes at your fingertips
                 </Text>
@@ -62,9 +58,7 @@ function IntroScreen({ navigation }) {
                 <Text 
                     style={{
                         ...globalStyles.introScreenSubHeading,
-                        color: themeContext.darkModeEnabled
-                            ? colors.grey
-                            : 'hsla(342, 30%, 8%, .9)'
+                        color: themeContext.themeColors.partialOpacityDarkBrownOrGrey
                     }}>
                     Cooking on Thermomix<Text style={ globalStyles.superscript }>{'\u00AE'}</Text> made easy
                 </Text>
@@ -74,17 +68,13 @@ function IntroScreen({ navigation }) {
                 <Pressable 
                     style={{
                         ...globalStyles.wideButton,
-                        backgroundColor: themeContext.darkModeEnabled
-                            ? colors.white
-                            : colors.darkBrown
+                        backgroundColor: themeContext.themeColors.whiteOrDarkBrown
                     }}
                     onPress={ () => navigation.navigate('Home') }
                 >
                     <Text style={{
                         ...globalStyles.wideButtonText,
-                        color: themeContext.darkModeEnabled
-                            ? colors.darkCharcoalGrey
-                            : colors.white
+                        color: themeContext.themeColors.whiteOrDarkCharcoalGrey
                     }}>
                         Let's start
                     </Text>

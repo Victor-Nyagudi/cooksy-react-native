@@ -46,16 +46,23 @@ export default function App() {
     toggleDarkMode: toggleDarkMode
   });
 
-  // const themeColors = {
-  //   backgroundColor: theme.darkModeEnabled
-  //     ? colors.darkModeBackground
-  //     : colors.lightModeBackground,
-  //   whiteOrDarkBrown: theme.darkModeEnabled
-  //     ? colors.white
-  //     : colors.darkBrown,
-  //   whiteOrDarkModeBackgroundColor: theme.darkModeEnabled
-  //     ? 
-  // };
+  const themeColors = {
+    backgroundColor: theme.darkModeEnabled
+      ? colors.darkCharcoalGrey
+      : colors.offWhite,
+    whiteOrDarkBrown: theme.darkModeEnabled
+      ? colors.white
+      : colors.darkBrown,
+    whiteOrDarkGreyPurple: theme.darkModeEnabled
+      ? colors.darkGreyPurple
+      : colors.white,
+    whiteOrDarkCharcoalGrey: theme.darkModeEnabled
+      ? colors.darkCharcoalGrey
+      : colors.white,
+    partialOpacityDarkBrownOrGrey: theme.darkModeEnabled
+      ? colors.grey
+      : colors.partialOpacityDarkBrown
+  };
 
   function toggleDarkMode() {
     setTheme(prevState => ({
@@ -77,20 +84,19 @@ export default function App() {
         <StatusBar style={ theme.darkModeEnabled ? "light" : "dark" } />
 
         <NavigationContainer>
-          <ThemeContext.Provider value={ theme }>
+          <ThemeContext.Provider value={{ 
+              theme: theme,
+              themeColors: themeColors 
+          }}>
             <Stack.Navigator screenOptions={{
               headerStyle: {
-                backgroundColor: theme.darkModeEnabled 
-                  ? globalStyles.darkModeBackgroundColor
-                  : globalStyles.lightModeBackgroundColor
+                backgroundColor: themeColors.backgroundColor
               },
               headerShadowVisible: false,
               headerTitleStyle: {
                 fontFamily: 'work-sans-semi-bold',
                 fontSize: 24,
-                color: theme.darkModeEnabled
-                  ? colors.white
-                  : colors.darkBrown
+                color: themeColors.whiteOrDarkBrown
               },
               headerTitleAlign: 'center',
             }}>
