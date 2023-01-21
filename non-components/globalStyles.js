@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import React from 'react';
 
 /*
     ? Fonts
@@ -29,7 +30,10 @@ export const colors = {
     white: 'hsla(0, 0%, 100%, 1.0)' // #FFFFFF
 };
 
-export const getColor = (color) => colors[color] ? colors[color] : 'red';
+export const ThemeContext = React.createContext({
+    darkModeEnabled: true,
+    toggleDarkMode: () => {}
+});
 
 //#region Inherited styles
 
@@ -65,11 +69,6 @@ const recipeImage = {
 const heroCardMaxWidth = 244;
 //#endregion
 
-/*
-    TODO: Rename global styles to 'lightModeStyles' and
-    TODO: then create and export another stylesheet for
-    TODO: dark mode called 'darkModeStyles'.
-*/
 const globalStyles = StyleSheet.create({
     //#region Shared
     container: {

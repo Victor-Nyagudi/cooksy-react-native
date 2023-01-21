@@ -1,4 +1,4 @@
-import globalStyles, { getColor } from "./non-components/globalStyles";
+import globalStyles, { colors, ThemeContext } from "./non-components/globalStyles";
 import { useFonts } from "expo-font";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,6 +9,8 @@ import HomeTabNavigation from "./components/shared/HomeTabNavigation";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import recipes from "./data.json";
+
+import React, { useState, useContext } from 'react';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +36,23 @@ export default function App() {
     'work-sans-bold': require('./assets/fonts/work-sans/WorkSans-Bold.ttf')
   });
 
+  /*
+    ? State should be exactly the same as the default
+    ? value in ThemeContext as recommended by docs.
+    ? https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
+  */
+  const [theme, setTheme] = useState({
+    darkModeEnabled: false,
+    toggleDarkMode: toggleDarkMode
+  });
+
+  function toggleDarkMode() {
+    setTheme(prevState => ({
+      ...prevState,
+      darkModeEnabled: !prevState.darkModeEnabled
+    }));
+  };
+
   if (!fontsLoaded)
     return null;
 
@@ -43,35 +62,37 @@ export default function App() {
       * somehow even though I don't remember applying it somewhere.
       * Worth looking into.
     */
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{
-          headerStyle: {
-            backgroundColor: globalStyles.lightModeBackgroundColor,
-          },
-          headerShadowVisible: false,
-          headerTitleStyle: {
-            fontFamily: 'work-sans-semi-bold',
-            fontSize: 24,
-            color: getColor('darkBrown')
-          },
-          headerTitleAlign: 'center',
-        }}>
-          <Stack.Screen 
-            name='Intro' 
-            component={ IntroScreen }
-            options={{ 
-              title: 'Cooksy',
-              headerTransparent: true // * <- Absolutely position header. Read more in docs: https://reactnavigation.org/docs/native-stack-navigator#headertransparent
-            }}
-          />
-          
-          <Stack.Screen 
-            name='Home' 
-            component={ HomeTabNavigation }
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <ThemeContext.Provider value={ theme }>
+            <Stack.Navigator screenOptions={{
+              headerStyle: {
+                backgroundColor: globalStyles.lightModeBackgroundColor,
+              },
+              headerShadowVisible: false,
+              headerTitleStyle: {
+                fontFamily: 'work-sans-semi-bold',
+                fontSize: 24,
+                color: colors.darkBrown
+              },
+              headerTitleAlign: 'center',
+            }}>
+              <Stack.Screen 
+                name='Intro' 
+                component={ IntroScreen }
+                options={{ 
+                  title: 'Cooksy',
+                  headerTransparent: true // * <- Absolutely position header. Read more in docs: https://reactnavigation.org/docs/native-stack-navigator#headertransparent
+                }}
+              />
+              
+              <Stack.Screen 
+                name='Home' 
+                component={ HomeTabNavigation }
+              />
+            </Stack.Navigator>
+          </ThemeContext.Provider>
+        </NavigationContainer>
+      </SafeAreaProvider>
   );
 }
