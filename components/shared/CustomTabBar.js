@@ -12,13 +12,17 @@
 */
 import { Pressable, View, Text } from "react-native";
 
-import globalStyles, { colors } from "../../non-components/globalStyles";
+import globalStyles, { colors, ThemeContext } from "../../non-components/globalStyles";
+import { useContext } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { faFireBurner, faGear, faListCheck } from "@fortawesome/free-solid-svg-icons";
 
 function CustomTabBar({ state, descriptors, navigation }) {
+    
+    const themeContext = useContext(ThemeContext);
+
     return ( 
         <View style={ globalStyles.tabBarContainer }>
             {
@@ -59,7 +63,33 @@ function CustomTabBar({ state, descriptors, navigation }) {
                     };
 
                     const isLastItem = index === state.routes.length - 1;
-                    const tabButtonContentColor = isFocused ? colors.white : colors.darkBrown;
+                    
+                    let tabButtonContentColor;
+                    let tabButtonBackgroundColor;
+
+                    // * Focused light mode
+                    if (isFocused && !themeContext.theme.darkModeEnabled) {
+                        tabButtonBackgroundColor = colors.darkBrown;
+                        tabButtonContentColor = colors.white;
+                    }
+                    
+                    // * Unfocused light mode
+                    else if (!isFocused && !themeContext.theme.darkModeEnabled) {
+                        tabButtonBackgroundColor = colors.white;
+                        tabButtonContentColor = colors.darkBrown;
+                    }
+                    
+                    // * Focused dark mode
+                    else if (isFocused && themeContext.theme.darkModeEnabled) {
+                        tabButtonBackgroundColor = colors.white;
+                        tabButtonContentColor = colors.darkGreyPurple;
+                    }
+
+                    // * Unfocused dark mode
+                    else {
+                        tabButtonBackgroundColor = colors.darkGreyPurple;
+                        tabButtonContentColor = colors.white;
+                    }
 
                     return (
                         <Pressable
@@ -72,7 +102,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
                             style={{ 
                                 ...globalStyles.tabBarButton, 
                                 marginRight: isLastItem ? 0 : 4,
-                                backgroundColor: isFocused ? colors.darkBrown : colors.white
+                                backgroundColor: tabButtonBackgroundColor
                             }}
                         >
                             <FontAwesomeIcon 
