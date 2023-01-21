@@ -1,4 +1,6 @@
-import globalStyles from "../non-components/globalStyles";
+import globalStyles, { ThemeContext } from "../non-components/globalStyles";
+
+import { useContext } from "react";
 
 import { Image, View, Text } from "react-native";
 import RecipePrepInfo from "./shared/RecipePrepInfo";
@@ -67,6 +69,8 @@ function RecipesColumn({
         }
     ];
 
+    const themeContext = useContext(ThemeContext);
+
     return ( 
         <View style={{ 
             flex:1,
@@ -80,7 +84,8 @@ function RecipesColumn({
                             key={ recipe.id }
                             style={{
                             ...globalStyles.recipeCard,
-                            marginBottom: rowGap
+                            marginBottom: rowGap,
+                            backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                         }}>
                             <Image 
                                 source={ images.filter(image => image.id === recipe.imageId)[0].image } // * <- Investigate why this might be bad based on docs
@@ -89,14 +94,16 @@ function RecipesColumn({
             
                             <Text style={{
                                 ...globalStyles.cardTitleSmall,
-                                marginBottom: 3
+                                marginBottom: 3,
+                                color: themeContext.themeColors.whiteOrDarkBrown
                             }}>
                                 { recipe.title }
                             </Text>
                             
                             <Text style={{
                                 ...globalStyles.recipePrepText,
-                                marginBottom: 30
+                                marginBottom: 30,
+                                color: themeContext.themeColors.whiteOrDarkBrown
                             }}>
                                 { recipe.blurb }
                             </Text>

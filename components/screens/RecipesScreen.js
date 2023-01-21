@@ -1,6 +1,6 @@
-import globalStyles from "../../non-components/globalStyles";
+import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { View, ScrollView } from "react-native";
 import RecipesColumn from "../RecipesColumn";
@@ -138,12 +138,13 @@ function RecipesScreen() {
         recipesContainerWidth ? .04 * recipesContainerWidth
         : 10;
 
-    // console.log(recipesContainerWidth);
+    const themeContext = useContext(ThemeContext);
 
     return ( 
         <View style={{
             ...globalStyles.container,
-            paddingHorizontal: 20
+            paddingHorizontal: 20,
+            backgroundColor: themeContext.themeColors.backgroundColor
         }}>
             {/* 
                 I iniitally went with a 'FlatList', but there are some
