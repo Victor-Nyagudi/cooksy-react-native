@@ -115,12 +115,16 @@ function HomeScreen({ navigation }) {
 
                 <Text style={{
                     ...globalStyles.lightModeTitleBig,
-                    marginBottom: 16
+                    marginBottom: 16,
+                    color: themeContext.themeColors.whiteOrDarkBrown
                 }}>
                     Ren{'\u00E9'} Redzepi's <Text style={{ fontFamily: 'work-sans-extra-light' }}>recommendation</Text>
                 </Text>
 
-                <View style={globalStyles.recommendedRecipe}>
+                <View style={{
+                    ...globalStyles.recommendedRecipe,
+                    backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
+                }}>
                     <Image
                         style={globalStyles.recommendedRecipeImage}
                         source={require('../../assets/images/jpg/chef-cooking.jpg')}
@@ -129,14 +133,16 @@ function HomeScreen({ navigation }) {
                     <Text style={{
                         ...globalStyles.cardTitleSmall,
                         fontSize: 18,
-                        marginBottom: 15
+                        marginBottom: 15,
+                        color: themeContext.themeColors.whiteOrDarkBrown
                     }}>
                         Vegan Thai Curry Soup
                     </Text>
 
                     <Text style={{
                         ...globalStyles.lightModeParagraph,
-                        marginBottom: 35
+                        marginBottom: 35,
+                        color: themeContext.themeColors.whiteOrDarkBrown
                     }}>
                         Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
                     </Text>
@@ -147,13 +153,15 @@ function HomeScreen({ navigation }) {
                 <Pressable
                     style={{
                         ...globalStyles.wideButtonTransparent,
-                        marginBottom: 44
+                        marginBottom: 44,
+                        backgroundColor: themeContext.themeColors.transparentOrDarkGreyPurple,
+                        borderColor: themeContext.themeColors.darkBrownOrDarkGreyPurple
                     }}
                     onPress={() => navigation.navigate('My Recipes')}
                 >
                     <Text style={{
                         ...globalStyles.wideButtonText,
-                        color: colors.darkBrown
+                        color: themeContext.themeColors.whiteOrDarkBrown
                     }}>
                         Browse more recipes
                     </Text>

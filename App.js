@@ -65,6 +65,12 @@ export default function App() {
     translucentDarkBrownOrGrey: theme.darkModeEnabled
       ? colors.grey
       : colors.translucentDarkBrown,
+    transparentOrDarkGreyPurple: theme.darkModeEnabled
+      ? colors.darkGreyPurple
+      : 'transparent',
+    darkBrownOrDarkGreyPurple: theme.darkModeEnabled
+      ? colors.darkGreyPurple
+      : colors.darkBrown
   };
 
   function toggleDarkMode() {
