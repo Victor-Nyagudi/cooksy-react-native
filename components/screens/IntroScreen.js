@@ -20,8 +20,8 @@ function IntroScreen({ navigation }) {
             paddingTop: insets.top,
             paddingBottom: insets.bottom,
             backgroundColor: themeContext.darkModeEnabled 
-                ? colors.darkModeBackground
-                : colors.lightModeBackground
+                ? colors.darkCharcoalGrey
+                : colors.offWhite
         }}>
             <View style={{ flex: 1 }}>
                 {/* 
@@ -83,7 +83,7 @@ function IntroScreen({ navigation }) {
                     <Text style={{
                         ...globalStyles.wideButtonText,
                         color: themeContext.darkModeEnabled
-                            ? colors.darkModeBackground
+                            ? colors.darkCharcoalGrey
                             : colors.white
                     }}>
                         Let's start

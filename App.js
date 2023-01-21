@@ -46,6 +46,17 @@ export default function App() {
     toggleDarkMode: toggleDarkMode
   });
 
+  // const themeColors = {
+  //   backgroundColor: theme.darkModeEnabled
+  //     ? colors.darkModeBackground
+  //     : colors.lightModeBackground,
+  //   whiteOrDarkBrown: theme.darkModeEnabled
+  //     ? colors.white
+  //     : colors.darkBrown,
+  //   whiteOrDarkModeBackgroundColor: theme.darkModeEnabled
+  //     ? 
+  // };
+
   function toggleDarkMode() {
     setTheme(prevState => ({
       ...prevState,

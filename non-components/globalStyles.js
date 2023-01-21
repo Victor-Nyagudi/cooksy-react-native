@@ -17,12 +17,12 @@ const borderRadius = {
 
 export const colors = {
     // * Dark mode 
-    darkModeBackground: 'hsla(260, 4%, 15%, 1.0)', // #252427
+    darkCharcoalGrey: 'hsla(260, 4%, 15%, 1.0)', // #252427
     darkGreyPurple: 'hsla(270, 4%, 22%, 1.0)', // #373539 
     grey: 'hsla(0, 0%, 80%, 1.0)', //#CBCBCB
 
     // * Light mode
-    lightModeBackground: 'hsla(30, 17%, 95%, 1.0)', // #F5F3F1
+    offWhite: 'hsla(30, 17%, 95%, 1.0)', // #F5F3F1
     darkBrown: 'hsla(342, 30%, 8%, 1.0)', // #1C0F13
     translucentDarkBrown: 'hsla(342, 30%, 8%, 0.65)', // #1C0F13
 
@@ -74,7 +74,7 @@ const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: colors.lightModeBackground,
+        backgroundColor: colors.offWhite,
         paddingHorizontal: 30
     },
     wideButton: {
@@ -104,8 +104,8 @@ const globalStyles = StyleSheet.create({
     //#endregion
 
     //#region Miscellaneous
-    lightModeBackgroundColor: colors.lightModeBackground,
-    darkModeBackgroundColor: colors.darkModeBackground,
+    lightModeBackgroundColor: colors.offWhite,
+    darkModeBackgroundColor: colors.darkCharcoalGrey,
     lightModeParagraph: { ...lightModeParagraph },
     lightModeTitle: { ...lightModeTitle },
     lightModeTitleBig: {
@@ -178,7 +178,7 @@ const globalStyles = StyleSheet.create({
 
     //#region Home Screen styles
     homeScreenScrollContainer: {
-        backgroundColor: colors.lightModeBackground,
+        backgroundColor: colors.offWhite,
         paddingTop: 50
     },
     homeScreenHero: {
