@@ -10,7 +10,8 @@ function SettingsScreen() {
     return ( 
         <View style={{
             ...globalStyles.container,
-            alignItems: 'flex-start'
+            alignItems: 'flex-start',
+            backgroundColor: themeContext.themeColors.backgroundColor
         }}>
             <View style={{
                 width: '100%',
@@ -18,7 +19,10 @@ function SettingsScreen() {
                 justifyContent: 'space-between',
                 alignItems: 'center'
             }}>
-                <Text style={ globalStyles.cardTitleSmall }>
+                <Text style={{
+                    ...globalStyles.cardTitleSmall,
+                    color: themeContext.themeColors.whiteOrDarkBrown
+                }}>
                     Dark Mode
                 </Text>
 
