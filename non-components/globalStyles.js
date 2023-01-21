@@ -184,7 +184,6 @@ const globalStyles = StyleSheet.create({
     },
     homeScreenHero: {
         alignItems: 'flex-start',
-        // backgroundColor: 'pink',
         maxHeight: 365,
         marginBottom: 66
     },
