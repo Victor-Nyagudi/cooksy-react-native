@@ -87,7 +87,7 @@ export default function App() {
       ? In our case, it's "My Recipes" as that's the first 
       ? screen inside the navigator
     */
-    const routeName = getFocusedRouteNameFromRoute(route) ?? "My Recipes";
+    const routeName = getFocusedRouteNameFromRoute(route) ?? "Inpirations";
 
     switch (routeName) {
       case 'My Recipes':
@@ -152,7 +152,10 @@ export default function App() {
                 name='Home' 
                 component={ HomeTabNavigation }
                 options={({ route }) => ({
-                  headerTitle: getHeaderTitle(route)
+                  headerTitle: getHeaderTitle(route),
+                  headerTitleStyle: getHeaderTitle(route) !== 'Cooksy'
+                    ? { fontFamily: 'work-sans-semi-bold', fontSize: 18 }
+                    : { fontFamily: 'work-sans-semi-bold', fontSize: 24 }
                 })}
               />
             </Stack.Navigator>
