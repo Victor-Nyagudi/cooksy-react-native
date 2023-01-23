@@ -102,10 +102,10 @@ export default function App() {
               headerShadowVisible: false,
               headerTitleStyle: {
                 fontFamily: 'work-sans-semi-bold',
-                fontSize: 24,
-                color: themeColors.whiteOrDarkBrown
+                fontSize: 24
               },
               headerTitleAlign: 'center',
+              headerTintColor: themeColors.whiteOrDarkBrown
             }}>
               <Stack.Screen 
                 name='Intro' 
