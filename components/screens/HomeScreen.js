@@ -30,7 +30,6 @@ function HomeScreen({ navigation }) {
         }}>
             <ScrollView
                 contentContainerStyle={{
-                    paddingHorizontal: 25,
                     alignItems: 'flex-start'
                 }}
             >
@@ -74,7 +73,8 @@ function HomeScreen({ navigation }) {
                         }}>
                             <Text style={{
                                 ...globalStyles.titleBig,
-                                color: themeContext.themeColors.whiteOrDarkBrown
+                                color: themeContext.themeColors.whiteOrDarkBrown,
+                                marginBottom: 20
                             }}>
                                 Cook {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>like a pro</Text>
                             </Text>
@@ -91,7 +91,7 @@ function HomeScreen({ navigation }) {
 
                                 <View style={ globalStyles.homeScreenHeroCaret }>
                                     <FontAwesomeIcon
-                                        icon={faAngleRight}
+                                        icon={ faAngleRight }
                                         style={{ position: 'absolute' }}
                                         color={ themeContext.themeColors.whiteOrDarkBrown }
                                     />
@@ -113,59 +113,63 @@ function HomeScreen({ navigation }) {
                     </View>
                 </ScrollView>
 
-                <Text style={{
-                    ...globalStyles.titleBig,
-                    marginBottom: 16,
-                    color: themeContext.themeColors.whiteOrDarkBrown
+                <View style={{ 
+                    paddingHorizontal: 25, 
+                    width: '100%',
+                    marginTop: 66 
                 }}>
-                    Ren{'\u00E9'} Redzepi's <Text style={{ fontFamily: 'work-sans-extra-light' }}>recommendation</Text>
-                </Text>
-
-                <View style={{
-                    ...globalStyles.recommendedRecipe,
-                    backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
-                }}>
-                    <Image
-                        style={globalStyles.recommendedRecipeImage}
-                        source={require('../../assets/images/jpg/chef-cooking.jpg')}
-                    />
-
                     <Text style={{
-                        ...globalStyles.cardTitleSmall,
-                        fontSize: 18,
-                        marginBottom: 15,
+                        ...globalStyles.titleBig,
+                        marginBottom: 16,
                         color: themeContext.themeColors.whiteOrDarkBrown
                     }}>
-                        Vegan Thai Curry Soup
+                        Ren{'\u00E9'} Redzepi's <Text style={{ fontFamily: 'work-sans-extra-light' }}>recommendation</Text>
                     </Text>
 
-                    <Text style={{
-                        ...globalStyles.paragraph,
-                        marginBottom: 35,
-                        color: themeContext.themeColors.whiteOrDarkBrown
+                    <View style={{
+                        ...globalStyles.recommendedRecipe,
+                        backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                     }}>
-                        Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
-                    </Text>
+                        <Image
+                            style={globalStyles.recommendedRecipeImage}
+                            source={require('../../assets/images/jpg/chef-cooking.jpg')}
+                        />
 
-                    <RecipePrepInfo marginBottom={ 0 }/>
+                        <Text style={{
+                            ...globalStyles.cardTitleMedium,
+                            color: themeContext.themeColors.whiteOrDarkBrown
+                        }}>
+                            Vegan Thai Curry Soup
+                        </Text>
+
+                        <Text style={{
+                            ...globalStyles.paragraph,
+                            marginBottom: 35,
+                            color: themeContext.themeColors.whiteOrDarkBrown
+                        }}>
+                            Spice lovers will slurp up this soup in seconds. Featuring chilli powder, smoked paprika, and cayenne pepper, every bowl brings the heat.
+                        </Text>
+
+                        <RecipePrepInfo marginBottom={ 0 }/>
+                    </View>
+
+                    <Pressable
+                        style={{
+                            ...globalStyles.wideButtonTransparent,
+                            marginBottom: 44,
+                            backgroundColor: themeContext.themeColors.transparentOrDarkGreyPurple,
+                            borderColor: themeContext.themeColors.darkBrownOrDarkGreyPurple
+                        }}
+                        onPress={() => navigation.navigate('My Recipes')}
+                    >
+                        <Text style={{
+                            ...globalStyles.wideButtonText,
+                            color: themeContext.themeColors.whiteOrDarkBrown
+                        }}>
+                            Browse more recipes
+                        </Text>
+                    </Pressable>
                 </View>
-
-                <Pressable
-                    style={{
-                        ...globalStyles.wideButtonTransparent,
-                        marginBottom: 44,
-                        backgroundColor: themeContext.themeColors.transparentOrDarkGreyPurple,
-                        borderColor: themeContext.themeColors.darkBrownOrDarkGreyPurple
-                    }}
-                    onPress={() => navigation.navigate('My Recipes')}
-                >
-                    <Text style={{
-                        ...globalStyles.wideButtonText,
-                        color: themeContext.themeColors.whiteOrDarkBrown
-                    }}>
-                        Browse more recipes
-                    </Text>
-                </Pressable>
             </ScrollView>
         </View>
     );

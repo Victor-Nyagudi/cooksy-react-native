@@ -62,6 +62,13 @@ const card = {
     padding: 25
 };
 
+const cardTitleSmall ={ 
+    fontFamily: 'work-sans-medium',
+    fontSize: 16,
+    color: colors.darkBrown,
+    lineHeight: 22
+};
+
 const recipeImage = {
     borderRadius: borderRadius.child,
     maxWidth: '100%'
@@ -189,18 +196,18 @@ const globalStyles = StyleSheet.create({
     },
     homeScreenHero: {
         alignItems: 'flex-start',
-        marginBottom: 66
+        paddingLeft: 25
     },
     homeScreenHeroCaret: {
         position: 'absolute',
         bottom: 17.5,
-        right: 74
+        right: 72
     },
-    cardTitleSmall: {
-        fontFamily: 'work-sans-medium',
-        fontSize: 16,
-        color: colors.darkBrown,
-        lineHeight: 22
+    cardTitleSmall: { ...cardTitleSmall },
+    cardTitleMedium: {
+        ...cardTitleSmall,
+        fontSize: 18,
+        marginBottom: 15
     },
     recipeOfDay: {
         ...card,
@@ -227,7 +234,7 @@ const globalStyles = StyleSheet.create({
     },
     recommendedRecipeImage: {
         ...recipeImage,
-        maxHeight: 187,
+        height: 187,
         marginBottom: 16
     },
     //#endregion
