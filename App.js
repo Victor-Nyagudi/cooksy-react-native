@@ -46,39 +46,37 @@ export default function App() {
     toggleDarkMode: toggleDarkMode
   });
 
-  const themeColors = {
-    backgroundColor: theme.darkModeEnabled
-      ? colors.darkCharcoalGrey
-      : colors.offWhite,
-    whiteOrDarkBrown: theme.darkModeEnabled
-      ? colors.white
-      : colors.darkBrown,
-    whiteOrDarkGreyPurple: theme.darkModeEnabled
-      ? colors.darkGreyPurple
-      : colors.white,
-    whiteOrDarkCharcoalGrey: theme.darkModeEnabled
-      ? colors.darkCharcoalGrey
-      : colors.white,
-    partialOpacityDarkBrownOrGrey: theme.darkModeEnabled
-      ? colors.grey
-      : colors.partialOpacityDarkBrown,
-    translucentDarkBrownOrGrey: theme.darkModeEnabled
-      ? colors.grey
-      : colors.translucentDarkBrown,
-    transparentOrDarkGreyPurple: theme.darkModeEnabled
-      ? colors.darkGreyPurple
-      : 'transparent',
-    darkBrownOrDarkGreyPurple: theme.darkModeEnabled
-      ? colors.darkGreyPurple
-      : colors.darkBrown
-  };
-
   function toggleDarkMode() {
     setTheme(prevState => ({
       ...prevState,
       darkModeEnabled: !prevState.darkModeEnabled
     }));
   };
+
+  const themeColors = {
+    backgroundColor: 
+      getColor(colors.offWhite, colors.darkCharcoalGrey),
+    whiteOrDarkBrown: 
+      getColor(colors.darkBrown, colors.white),
+    whiteOrDarkGreyPurple: 
+      getColor(colors.white, colors.darkGreyPurple),
+    whiteOrDarkCharcoalGrey: 
+      getColor(colors.white, colors.darkCharcoalGrey),
+    partialOpacityDarkBrownOrGrey: 
+      getColor(colors.partialOpacityDarkBrown, colors.grey),
+    translucentDarkBrownOrGrey: 
+      getColor(colors.translucentDarkBrown, colors.grey),
+    transparentOrDarkGreyPurple: 
+      getColor('transparent', colors.darkGreyPurple),
+    darkBrownOrDarkGreyPurple: 
+      getColor(colors.darkBrown, colors.darkGreyPurple)
+  };
+
+  function getColor(lightModeColor, darkModeColor) {
+    return theme.darkModeEnabled
+      ? darkModeColor
+      : lightModeColor;
+  }
 
   if (!fontsLoaded)
     return null;
