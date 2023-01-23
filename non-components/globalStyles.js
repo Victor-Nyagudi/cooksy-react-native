@@ -102,6 +102,11 @@ const globalStyles = StyleSheet.create({
         fontSize: 15,
         color: colors.translucentDarkBrown
     },
+    flexSpaceBetween: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },  
     //#endregion
 
     //#region Miscellaneous
@@ -244,6 +249,18 @@ const globalStyles = StyleSheet.create({
         ...recipeImage,
         height: 92.75,
         marginBottom: 10
+    },
+    //#endregion
+
+    //#region 
+    cookingCard: { ...card },
+    cookingCardHeaderText: { 
+        fontFamily: 'work-sans-regular',
+        fontSize: 13 
+    },
+    cookingCardText: {
+        fontFamily: 'roboto-light',
+        fontSize: 16
     }
     //#endregion
 });
