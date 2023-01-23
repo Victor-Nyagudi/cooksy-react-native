@@ -44,7 +44,7 @@ function HomeScreen({ navigation }) {
                         backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                     }} >
                         <Text style={{
-                            ...globalStyles.lightModeTitleBig,
+                            ...globalStyles.titleBig,
                             marginBottom: 26,
                             color: themeContext.themeColors.whiteOrDarkBrown
                         }}>
@@ -73,7 +73,7 @@ function HomeScreen({ navigation }) {
                             backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                         }}>
                             <Text style={{
-                                ...globalStyles.lightModeTitleBig,
+                                ...globalStyles.titleBig,
                                 color: themeContext.themeColors.whiteOrDarkBrown
                             }}>
                                 Cook {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>like a pro</Text>
@@ -104,7 +104,7 @@ function HomeScreen({ navigation }) {
                             backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                         }}>
                             <Text style={{
-                                ...globalStyles.lightModeTitleBig,
+                                ...globalStyles.titleBig,
                                 color: themeContext.themeColors.whiteOrDarkBrown
                             }}>
                                 Check {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>new updates</Text>
@@ -114,7 +114,7 @@ function HomeScreen({ navigation }) {
                 </ScrollView>
 
                 <Text style={{
-                    ...globalStyles.lightModeTitleBig,
+                    ...globalStyles.titleBig,
                     marginBottom: 16,
                     color: themeContext.themeColors.whiteOrDarkBrown
                 }}>
@@ -140,7 +140,7 @@ function HomeScreen({ navigation }) {
                     </Text>
 
                     <Text style={{
-                        ...globalStyles.lightModeParagraph,
+                        ...globalStyles.paragraph,
                         marginBottom: 35,
                         color: themeContext.themeColors.whiteOrDarkBrown
                     }}>

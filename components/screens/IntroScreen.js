@@ -42,7 +42,7 @@ function IntroScreen({ navigation }) {
                 </View>
 
                 <Text style={{ 
-                    ...globalStyles.lightModeTitle,
+                    ...globalStyles.title,
                     textAlign: 'center',
                     marginBottom: 12,
                     color: themeContext.themeColors.whiteOrDarkBrown 

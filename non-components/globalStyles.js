@@ -112,9 +112,9 @@ const globalStyles = StyleSheet.create({
     //#region Miscellaneous
     lightModeBackgroundColor: colors.offWhite,
     darkModeBackgroundColor: colors.darkCharcoalGrey,
-    lightModeParagraph: { ...lightModeParagraph },
-    lightModeTitle: { ...lightModeTitle },
-    lightModeTitleBig: {
+    paragraph: { ...lightModeParagraph },
+    title: { ...lightModeTitle },
+    titleBig: {
         ...lightModeTitle,
         fontSize: 32
     },
