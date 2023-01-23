@@ -90,14 +90,14 @@ export default function App() {
     const routeName = getFocusedRouteNameFromRoute(route) ?? "My Recipes";
 
     switch (routeName) {
-      case 'Settings':
-        return 'Settings';
-      
       case 'My Recipes':
         return 'My recipes';
-
+        
       case 'Cook Now!':
         return 'Cooking time!'
+          
+      case 'Settings':
+        return 'Settings';
 
       default:
         return 'Cooksy';
