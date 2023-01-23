@@ -189,7 +189,6 @@ const globalStyles = StyleSheet.create({
     },
     homeScreenHero: {
         alignItems: 'flex-start',
-        maxHeight: 365,
         marginBottom: 66
     },
     homeScreenHeroCaret: {
@@ -211,7 +210,7 @@ const globalStyles = StyleSheet.create({
     },
     recipeOfDayImage: {
         ...recipeImage,
-        maxHeight: 121
+        height: 121
     },
     heroCardTall: {
         ...card,
@@ -252,7 +251,7 @@ const globalStyles = StyleSheet.create({
     },
     //#endregion
 
-    //#region 
+    //#region Cooking Screen styles
     cookingCard: { ...card },
     cookingCardHeaderText: { 
         fontFamily: 'work-sans-regular',
