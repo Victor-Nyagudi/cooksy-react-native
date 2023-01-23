@@ -19,110 +19,123 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { faFireBurner, faGear, faListCheck } from "@fortawesome/free-solid-svg-icons";
 
+
 function CustomTabBar({ state, descriptors, navigation }) {
     
     const themeContext = useContext(ThemeContext);
 
     return ( 
-        <View style={ globalStyles.tabBarContainer }>
-            {
-                state.routes.map((route, index) => {
-                    const { options } = descriptors[route.key];
+        <View style={{
+            backgroundColor: themeContext.themeColors.backgroundColor,
+            paddingBottom: 10
+        }}>
+            <View style={{
+                ...globalStyles.tabBarContainer,
+                /*
+                    * Final background color to be implemented after
+                    * animations are done
+                */  
+                // backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
+            }}>
+                {
+                    state.routes.map((route, index) => {
+                        const { options } = descriptors[route.key];
 
-                    const label = 
-                        options.tabBarLabel !== undefined 
-                        ? options.tabBarLabel
-                        : options.title !== undefined
-                        ? options.title
-                        : route.name;
+                        const label = 
+                            options.tabBarLabel !== undefined 
+                            ? options.tabBarLabel
+                            : options.title !== undefined
+                            ? options.title
+                            : route.name;
 
-                    const lowerCaseLabel = label.toLowerCase();
-                    
-                    const icon = 
-                        lowerCaseLabel === 'inspirations' ? faLightbulb
-                        : lowerCaseLabel === 'my recipes' ? faListCheck
-                        : lowerCaseLabel === 'cook now!' ? faFireBurner
-                        : faGear;
+                        const lowerCaseLabel = label.toLowerCase();
+                        
+                        const icon = 
+                            lowerCaseLabel === 'inspirations' ? faLightbulb
+                            : lowerCaseLabel === 'my recipes' ? faListCheck
+                            : lowerCaseLabel === 'cook now!' ? faFireBurner
+                            : faGear;
 
-                    const isFocused = state.index === index;
+                        const isFocused = state.index === index;
 
-                    /*
-                        * This custom function should not be 
-                        * confused with the built in 'onPress' prop
-                        * in some components e.g. 'Button'
-                    */
-                    const onPress = () => {
-                        const event = navigation.emit({
-                            type: 'tabPress',
-                            target: route.key,
-                            canPreventDefault: true
-                        });
+                        /*
+                            * This custom function should not be 
+                            * confused with the built in 'onPress' prop
+                            * in some components e.g. 'Button'
+                        */
+                        const onPress = () => {
+                            const event = navigation.emit({
+                                type: 'tabPress',
+                                target: route.key,
+                                canPreventDefault: true
+                            });
 
-                        if (!isFocused && !event.defaultPrevented)
-                            navigation.navigate({ name: route.name, merge: true });
-                    };
+                            if (!isFocused && !event.defaultPrevented)
+                                navigation.navigate({ name: route.name, merge: true });
+                        };
 
-                    const isLastItem = index === state.routes.length - 1;
-                    
-                    let tabButtonContentColor;
-                    let tabButtonBackgroundColor;
+                        const isLastItem = index === state.routes.length - 1;
+                        
+                        let tabButtonContentColor;
+                        let tabButtonBackgroundColor;
 
-                    // * Focused light mode
-                    if (isFocused && !themeContext.theme.darkModeEnabled) {
-                        tabButtonBackgroundColor = colors.darkBrown;
-                        tabButtonContentColor = colors.white;
-                    }
-                    
-                    // * Unfocused light mode
-                    else if (!isFocused && !themeContext.theme.darkModeEnabled) {
-                        tabButtonBackgroundColor = colors.white;
-                        tabButtonContentColor = colors.darkBrown;
-                    }
-                    
-                    // * Focused dark mode
-                    else if (isFocused && themeContext.theme.darkModeEnabled) {
-                        tabButtonBackgroundColor = colors.white;
-                        tabButtonContentColor = colors.darkGreyPurple;
-                    }
+                        // * Focused light mode
+                        if (isFocused && !themeContext.theme.darkModeEnabled) {
+                            tabButtonBackgroundColor = colors.darkBrown;
+                            tabButtonContentColor = colors.white;
+                        }
+                        
+                        // * Unfocused light mode
+                        else if (!isFocused && !themeContext.theme.darkModeEnabled) {
+                            tabButtonBackgroundColor = colors.white;
+                            tabButtonContentColor = colors.darkBrown;
+                        }
+                        
+                        // * Focused dark mode
+                        else if (isFocused && themeContext.theme.darkModeEnabled) {
+                            tabButtonBackgroundColor = colors.white;
+                            tabButtonContentColor = colors.darkGreyPurple;
+                        }
 
-                    // * Unfocused dark mode
-                    else {
-                        tabButtonBackgroundColor = colors.darkGreyPurple;
-                        tabButtonContentColor = colors.white;
-                    }
+                        // * Unfocused dark mode
+                        else {
+                            tabButtonBackgroundColor = colors.darkGreyPurple;
+                            tabButtonContentColor = colors.white;
+                        }
 
-                    return (
-                        <Pressable
-                            key={ index }
-                            accessibilityRole="button"
-                            accessibilityState={ isFocused ? { selected: true } : {} }
-                            accessibilityLabel={ options.tabBarAccessibilityLabel }
-                            testID={ options.tabBarTestID }
-                            onPress={ onPress }
-                            style={{ 
-                                ...globalStyles.tabBarButton, 
-                                marginRight: isLastItem ? 0 : 4,
-                                backgroundColor: tabButtonBackgroundColor
-                            }}
-                        >
-                            <FontAwesomeIcon 
-                                icon={ icon }
-                                size={ 16 }
-                                color={ tabButtonContentColor }
-                                style={ globalStyles.tabBarIcon }
-                            />
-                            <Text 
+                        return (
+                            <Pressable
+                                key={ index }
+                                accessibilityRole="button"
+                                accessibilityState={ isFocused ? { selected: true } : {} }
+                                accessibilityLabel={ options.tabBarAccessibilityLabel }
+                                testID={ options.tabBarTestID }
+                                onPress={ onPress }
                                 style={{ 
-                                    ...globalStyles.tabBarButtonText, 
-                                    color: tabButtonContentColor 
+                                    ...globalStyles.tabBarButton, 
+                                    marginRight: isLastItem ? 0 : 4,
+                                    backgroundColor: tabButtonBackgroundColor
                                 }}
                             >
-                                { label }
-                            </Text>
-                        </Pressable>
-                    );
-                })
-            }
+                                <FontAwesomeIcon 
+                                    icon={ icon }
+                                    size={ 16 }
+                                    color={ tabButtonContentColor }
+                                    style={ globalStyles.tabBarIcon }
+                                />
+                                <Text 
+                                    style={{ 
+                                        ...globalStyles.tabBarButtonText, 
+                                        color: tabButtonContentColor 
+                                    }}
+                                >
+                                    { label }
+                                </Text>
+                            </Pressable>
+                        );
+                    })
+                }
+            </View>
         </View>
     );
 }
