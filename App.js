@@ -1,4 +1,4 @@
-import globalStyles, { colors, ThemeContext } from "./non-components/globalStyles";
+import { colors, ThemeContext } from "./non-components/globalStyles";
 import { useFonts } from "expo-font";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,6 +11,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import React, { useState } from 'react';
 
 import { StatusBar } from "expo-status-bar";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 
 const Stack = createNativeStackNavigator();
@@ -78,6 +79,31 @@ export default function App() {
       : lightModeColor;
   }
 
+  function getHeaderTitle(route) {
+    /* 
+      ? If the focused route is not found, we need to assume 
+      ? it's the initial screen. This can happen if 
+      ? there hasn't been any navigation inside the screen
+      ? In our case, it's "My Recipes" as that's the first 
+      ? screen inside the navigator
+    */
+    const routeName = getFocusedRouteNameFromRoute(route) ?? "My Recipes";
+
+    switch (routeName) {
+      case 'Settings':
+        return 'Settings';
+      
+      case 'My Recipes':
+        return 'My recipes';
+
+      case 'Cook Now!':
+        return 'Cooking time!'
+
+      default:
+        return 'Cooksy';
+    }
+  }
+
   if (!fontsLoaded)
     return null;
 
@@ -116,9 +142,18 @@ export default function App() {
                 }}
               />
               
+              {/* 
+                This part of the docs explained how to set the
+                header title of the stack navigator based on the
+                state of the nested tab navigator.
+                https://reactnavigation.org/docs/screen-options-resolution#setting-parent-screen-options-based-on-child-navigators-state
+              */}
               <Stack.Screen 
                 name='Home' 
                 component={ HomeTabNavigation }
+                options={({ route }) => ({
+                  headerTitle: getHeaderTitle(route)
+                })}
               />
             </Stack.Navigator>
           </ThemeContext.Provider>
