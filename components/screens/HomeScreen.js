@@ -4,7 +4,9 @@ import {
     Text,
     ScrollView,
     Pressable,
-    Image
+    Image,
+    Animated,
+    Easing
 } from "react-native";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -14,13 +16,44 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import RecipePrepInfo from "../shared/RecipePrepInfo";
 
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation, route }) {
     const insets = useSafeAreaInsets();
     const themeContext = useContext(ThemeContext)
 
     const extraLightFontFamily = 'work-sans-extra-light';
+
+    /*
+        * Initial value of 0.
+        * refs are good for animations because they can store 
+        * mutable values in an object that stays the same 
+        * on every render
+    */
+    const initialFadeValue = new Animated.Value(0);
+
+    /*
+        * Using this instead of useEffect because screen 
+        * isn't re-rendered when switching tabs - only the 
+        * custom tab bar is. This is because the stack navigator
+        * is what renders all the screens in the tab bar, and
+        * switching back and forth from intro screen to 
+        * HomeTabNavigation is what causes a re-render.
+        
+        * Note that without adding the params object during 
+        * navigation in the tab navbar, this if statement will
+        * not be executed.
+    */
+    if (navigation.isFocused()) {
+        Animated.timing(initialFadeValue, {
+            toValue: 1,
+            duration: 1000,
+            easing: Easing.ease,
+            useNativeDriver: true
+        }).start();
+    }
+
+    // console.log(`Home screen focused: ${navigation.isFocused()}`);
 
     return (
         <View style={{
@@ -29,17 +62,16 @@ function HomeScreen({ navigation }) {
             backgroundColor: themeContext.themeColors.backgroundColor
         }}>
             <ScrollView
-                contentContainerStyle={{
-                    alignItems: 'flex-start'
-                }}
+                contentContainerStyle={{ alignItems: 'flex-start' }}
             >
                 <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={ globalStyles.homeScreenHero }
                 >
-                    <View style={{
+                    <Animated.View style={{
                         ...globalStyles.recipeOfDay,
+                        opacity: initialFadeValue,
                         backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                     }} >
                         <Text style={{
@@ -64,7 +96,7 @@ function HomeScreen({ navigation }) {
                             source={require('../../assets/images/jpg/pumpkins.jpg')}
                             style={globalStyles.recipeOfDayImage}
                         />
-                    </View>
+                    </Animated.View>
 
                     <View style={{ paddingTop: 31 }}>
                         <View style={{

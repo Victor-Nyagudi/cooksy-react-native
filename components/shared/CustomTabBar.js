@@ -70,8 +70,13 @@ function CustomTabBar({ state, descriptors, navigation }) {
                                 canPreventDefault: true
                             });
 
+                            /*
+                                * It seems adding params when navigating
+                                * to a new route causes it to re-render
+                                * which can be used to trigger the animation
+                            */
                             if (!isFocused && !event.defaultPrevented)
-                                navigation.navigate({ name: route.name, merge: true });
+                                navigation.navigate({ name: route.name, merge: true, params: { shouldAnimate: true } });
                         };
 
                         const isLastItem = index === state.routes.length - 1;
