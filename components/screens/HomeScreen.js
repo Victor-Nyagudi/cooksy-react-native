@@ -31,6 +31,8 @@ function HomeScreen({ navigation, route }) {
         * on every render
     */
     const initialFadeValue = new Animated.Value(0);
+    const initialRecipeCardPosition = new Animated.Value(80);
+    const remainingHeroCardsPosition = new Animated.Value(100);
 
     /*
         * Using this instead of useEffect because screen 
@@ -44,16 +46,51 @@ function HomeScreen({ navigation, route }) {
         * navigation in the tab navbar, this if statement will
         * not be executed.
     */
-    if (navigation.isFocused()) {
-        Animated.timing(initialFadeValue, {
-            toValue: 1,
-            duration: 1000,
-            easing: Easing.ease,
-            useNativeDriver: true
-        }).start();
-    }
+    useEffect(() => {
+        Animated.parallel([
+            Animated.timing(initialFadeValue, {
+                toValue: 1,
+                duration: 900,
+                useNativeDriver: true
+            }),
+            Animated.timing(initialRecipeCardPosition, {
+                toValue: 0,
+                duration: 550,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true
+            }),
+            Animated.timing(remainingHeroCardsPosition, {
+                toValue: 0,
+                delay: 250,
+                duration: 300,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true
+            })
+        ]).start();
+    }, []);
 
-    // console.log(`Home screen focused: ${navigation.isFocused()}`);
+    if (navigation.isFocused()) {
+        Animated.parallel([
+            Animated.timing(initialFadeValue, {
+                toValue: 1,
+                duration: 900,
+                useNativeDriver: true
+            }),
+            Animated.timing(initialRecipeCardPosition, {
+                toValue: 0,
+                duration: 550,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true
+            }),
+            Animated.timing(remainingHeroCardsPosition, {
+                toValue: 0,
+                delay: 250,
+                duration: 300,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true
+            })
+        ]).start();
+    }
 
     return (
         <View style={{
@@ -72,6 +109,7 @@ function HomeScreen({ navigation, route }) {
                     <Animated.View style={{
                         ...globalStyles.recipeOfDay,
                         opacity: initialFadeValue,
+                        transform: [{ translateX: initialRecipeCardPosition }],
                         backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                     }} >
                         <Text style={{
@@ -98,7 +136,11 @@ function HomeScreen({ navigation, route }) {
                         />
                     </Animated.View>
 
-                    <View style={{ paddingTop: 31 }}>
+                    <Animated.View style={{ 
+                        paddingTop: 31,
+                        opacity: initialFadeValue,
+                        transform: [{ translateX: remainingHeroCardsPosition }], 
+                    }}>
                         <View style={{
                             ...globalStyles.heroCardTall,
                             backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
@@ -142,7 +184,7 @@ function HomeScreen({ navigation, route }) {
                                 Check {'\n'}<Text style={{ fontFamily: extraLightFontFamily }}>new updates</Text>
                             </Text>
                         </View>
-                    </View>
+                    </Animated.View>
                 </ScrollView>
 
                 <View style={{ 
