@@ -10,10 +10,10 @@
     ? Medium article using 'Pressable'
     ? https://jaka-tertinek.medium.com/custom-bottom-tab-navigator-react-native-cda675172dac
 */
-import { Pressable, View, Text } from "react-native";
+import { Animated, Pressable, View, Text, Easing } from "react-native";
 
 import globalStyles, { colors, ThemeContext } from "../../non-components/globalStyles";
-import { useContext } from "react";
+import { useContext, useState, useRef } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
@@ -23,6 +23,23 @@ import { faFireBurner, faGear, faListCheck } from "@fortawesome/free-solid-svg-i
 function CustomTabBar({ state, descriptors, navigation }) {
     
     const themeContext = useContext(ThemeContext);
+
+    const [bgHighlightInfo, setBgHighlightInfo] = useState({
+       width: null,
+       height: null,
+       activeTabButtonXCoordinate: 0, // * <- x co-ordinate (leftmost part) of active button for alignment
+       tabButtonsXCoordinates: [] // * <- This will store all x co-ordinates when page loads
+    });
+
+    const initialBgHighlightPosition = new Animated.Value(bgHighlightInfo.activeTabButtonXCoordinate);
+
+    Animated.timing(initialBgHighlightPosition, {
+        toValue: 100,
+        duration: 500,
+        easing: Easing.ease,
+        useNativeDriver: true
+    }).start();
+
 
     return ( 
         <View style={{
@@ -35,8 +52,28 @@ function CustomTabBar({ state, descriptors, navigation }) {
                     * Final background color to be implemented after
                     * animations are done
                 */  
-                // backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
+                backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
             }}>
+                <Animated.View style={{
+                    /*
+                        * Width and height values can also be obtained by inspecting the
+                        * width and height of the tab buttons. Since these values are
+                        * in pixels (absolute), you could technically use them here since 
+                        * they won't change based on screen size. This approach is a bit more
+                        * hacky and not very reliable.
+                    */
+                    width: bgHighlightInfo.width, 
+                    height: bgHighlightInfo.height,
+                    position: 'absolute',
+                    top: globalStyles.tabBarContainer.paddingVertical,
+                    // left: bgHighlightInfo.activeTabButtonXCoordinate,
+                    backgroundColor: 'blue',
+                    borderRadius: globalStyles.tabBarButton.borderRadius,
+                    opacity: .45,
+                    transform: [{ translateX: initialBgHighlightPosition }]
+                }}>
+
+                </Animated.View>
                 {
                     state.routes.map((route, index) => {
                         const { options } = descriptors[route.key];
@@ -73,10 +110,29 @@ function CustomTabBar({ state, descriptors, navigation }) {
                             /*
                                 * It seems adding params when navigating
                                 * to a new route causes it to re-render
-                                * which can be used to trigger the animation
+                                * which can be used to trigger the HomeScreen animation
+                                * when switching to it.
                             */
-                            if (!isFocused && !event.defaultPrevented)
+                            if (!isFocused && !event.defaultPrevented) {
                                 navigation.navigate({ name: route.name, merge: true, params: { shouldAnimate: true } });
+
+                                // Animated.timing(initialBgHighlightPosition, {
+                                //     toValue: 150,
+                                //     duration: 2000,
+                                //     easing: Easing.ease,
+                                //     useNativeDriver: true
+                                // }).start();
+
+                                /*
+                                    * After clicking, set active tab x co-ordinate
+                                    * to clicked tab button to move the bg highlight 
+                                */
+                                setBgHighlightInfo(prevState => ({
+                                    ...prevState, 
+                                    activeTabButtonXCoordinate: 
+                                        prevState.tabButtonsXCoordinates[index]
+                                }));
+                            }
                         };
 
                         const isLastItem = index === state.routes.length - 1;
@@ -86,13 +142,13 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
                         // * Focused light mode
                         if (isFocused && !themeContext.theme.darkModeEnabled) {
-                            tabButtonBackgroundColor = colors.darkBrown;
+                            tabButtonBackgroundColor = 'transparent';
                             tabButtonContentColor = colors.white;
                         }
                         
                         // * Unfocused light mode
                         else if (!isFocused && !themeContext.theme.darkModeEnabled) {
-                            tabButtonBackgroundColor = colors.white;
+                            tabButtonBackgroundColor = 'transparent';
                             tabButtonContentColor = colors.darkBrown;
                         }
                         
@@ -116,6 +172,20 @@ function CustomTabBar({ state, descriptors, navigation }) {
                                 accessibilityLabel={ options.tabBarAccessibilityLabel }
                                 testID={ options.tabBarTestID }
                                 onPress={ onPress }
+                                onLayout={(event) => 
+                                    setBgHighlightInfo({
+                                        width: event.nativeEvent.layout.width,
+                                        height: event.nativeEvent.layout.height,
+                                        activeTabButtonXCoordinate: isFocused 
+                                            ? event.nativeEvent.layout.x
+                                            : bgHighlightInfo.activeTabButtonXCoordinate,
+                                        tabButtonsXCoordinates: 
+                                            [
+                                                ...bgHighlightInfo.tabButtonsXCoordinates,
+                                                event.nativeEvent.layout.x
+                                            ]
+                                    })
+                                }
                                 style={{ 
                                     ...globalStyles.tabBarButton, 
                                     marginRight: isLastItem ? 0 : 4,
