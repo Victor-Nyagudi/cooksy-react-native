@@ -156,7 +156,7 @@ const globalStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         borderRadius: borderRadius.parent,
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         paddingHorizontal: 9,
         paddingBottom: 8.5,
         paddingTop: 11

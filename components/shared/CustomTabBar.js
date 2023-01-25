@@ -27,16 +27,19 @@ function CustomTabBar({ state, descriptors, navigation }) {
     const [bgHighlightInfo, setBgHighlightInfo] = useState({
        width: null,
        height: null,
+       prevTabButtonXCoordinate: 0, // * <- initial value must be 0 otherwise error is thrown if null/undefined
        activeTabButtonXCoordinate: 0, // * <- x co-ordinate (leftmost part) of active button for alignment
        tabButtonsXCoordinates: [] // * <- This will store all x co-ordinates when page loads
     });
 
-    const initialBgHighlightPosition = new Animated.Value(bgHighlightInfo.activeTabButtonXCoordinate);
+    const initialBgHighlightPosition = new Animated.Value(bgHighlightInfo.prevTabButtonXCoordinate);
+
+    // console.log(bgHighlightInfo.prevTabButtonXCoordinate);
 
     Animated.timing(initialBgHighlightPosition, {
-        toValue: 100,
+        toValue: bgHighlightInfo.activeTabButtonXCoordinate,
         duration: 500,
-        easing: Easing.ease,
+        easing: Easing.out(Easing.ease),
         useNativeDriver: true
     }).start();
 
@@ -67,12 +70,16 @@ function CustomTabBar({ state, descriptors, navigation }) {
                     position: 'absolute',
                     top: globalStyles.tabBarContainer.paddingVertical,
                     // left: bgHighlightInfo.activeTabButtonXCoordinate,
-                    backgroundColor: 'blue',
+                    backgroundColor: themeContext.themeColors.whiteOrDarkBrown,
                     borderRadius: globalStyles.tabBarButton.borderRadius,
-                    opacity: .45,
+                    // opacity: .45,
+                    // zIndex: 1,
                     transform: [{ translateX: initialBgHighlightPosition }]
                 }}>
-
+                     {/* 
+                        This AnimatedView is the background rectangle that moves to the 
+                        selected tab.
+                     */}
                 </Animated.View>
                 {
                     state.routes.map((route, index) => {
@@ -116,19 +123,17 @@ function CustomTabBar({ state, descriptors, navigation }) {
                             if (!isFocused && !event.defaultPrevented) {
                                 navigation.navigate({ name: route.name, merge: true, params: { shouldAnimate: true } });
 
-                                // Animated.timing(initialBgHighlightPosition, {
-                                //     toValue: 150,
-                                //     duration: 2000,
-                                //     easing: Easing.ease,
-                                //     useNativeDriver: true
-                                // }).start();
-
                                 /*
-                                    * After clicking, set active tab x co-ordinate
-                                    * to clicked tab button to move the bg highlight 
+                                    * After clicking, set the active tab x co-ordinate
+                                    * to clicked tab button to move the bg highlight.
+                                    * The previous x co-ordinate is saved in state to 
+                                    * act as a starting point for the animation that plays
+                                    * when the page renders (navigating to a new screen triggers
+                                    * this re-render because params are passed into navigate method) 
                                 */
                                 setBgHighlightInfo(prevState => ({
                                     ...prevState, 
+                                    prevTabButtonXCoordinate: prevState.activeTabButtonXCoordinate,
                                     activeTabButtonXCoordinate: 
                                         prevState.tabButtonsXCoordinates[index]
                                 }));
@@ -138,31 +143,22 @@ function CustomTabBar({ state, descriptors, navigation }) {
                         const isLastItem = index === state.routes.length - 1;
                         
                         let tabButtonContentColor;
-                        let tabButtonBackgroundColor;
 
                         // * Focused light mode
-                        if (isFocused && !themeContext.theme.darkModeEnabled) {
-                            tabButtonBackgroundColor = 'transparent';
+                        if (isFocused && !themeContext.theme.darkModeEnabled) 
                             tabButtonContentColor = colors.white;
-                        }
                         
                         // * Unfocused light mode
-                        else if (!isFocused && !themeContext.theme.darkModeEnabled) {
-                            tabButtonBackgroundColor = 'transparent';
+                        else if (!isFocused && !themeContext.theme.darkModeEnabled) 
                             tabButtonContentColor = colors.darkBrown;
-                        }
                         
                         // * Focused dark mode
-                        else if (isFocused && themeContext.theme.darkModeEnabled) {
-                            tabButtonBackgroundColor = colors.white;
+                        else if (isFocused && themeContext.theme.darkModeEnabled) 
                             tabButtonContentColor = colors.darkGreyPurple;
-                        }
 
                         // * Unfocused dark mode
-                        else {
-                            tabButtonBackgroundColor = colors.darkGreyPurple;
+                        else 
                             tabButtonContentColor = colors.white;
-                        }
 
                         return (
                             <Pressable
@@ -176,6 +172,9 @@ function CustomTabBar({ state, descriptors, navigation }) {
                                     setBgHighlightInfo({
                                         width: event.nativeEvent.layout.width,
                                         height: event.nativeEvent.layout.height,
+                                        prevTabButtonXCoordinate: isFocused 
+                                            ? event.nativeEvent.layout.x
+                                            : bgHighlightInfo.activeTabButtonXCoordinate,
                                         activeTabButtonXCoordinate: isFocused 
                                             ? event.nativeEvent.layout.x
                                             : bgHighlightInfo.activeTabButtonXCoordinate,
@@ -188,8 +187,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
                                 }
                                 style={{ 
                                     ...globalStyles.tabBarButton, 
-                                    marginRight: isLastItem ? 0 : 4,
-                                    backgroundColor: tabButtonBackgroundColor
+                                    marginRight: isLastItem ? 0 : 4
                                 }}
                             >
                                 <FontAwesomeIcon 
