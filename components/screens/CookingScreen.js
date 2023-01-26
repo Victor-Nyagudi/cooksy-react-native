@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Animated, Easing } from "react-native";
 import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
 
 import { useContext } from "react";
@@ -6,8 +6,29 @@ import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-function CookingScreen() {
+function CookingScreen({ navigation }) {
     const themeContext = useContext(ThemeContext);
+
+    const initialAnimatedValues = {
+        opacity: new Animated.Value(0),
+        cardPosition: new Animated.Value(80),
+    };
+
+    if (navigation.isFocused()) {
+        Animated.parallel([
+            Animated.timing(initialAnimatedValues.opacity, {
+                toValue: 1,
+                duration: 900,
+                useNativeDriver: true
+            }),
+            Animated.timing(initialAnimatedValues.cardPosition, {
+                toValue: 0,
+                duration: 550,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true
+            })
+        ]).start();
+    }
 
     return ( 
         <View style={{
@@ -15,7 +36,10 @@ function CookingScreen() {
             justifyContent: 'center',
             backgroundColor: themeContext.themeColors.backgroundColor
         }}>
-            <View>
+            <Animated.View style={{
+                opacity: initialAnimatedValues.opacity,
+                transform: [{ translateX: initialAnimatedValues.cardPosition }]
+            }}>
                 <View style={{
                     ...globalStyles.cookingCard,
                     backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
@@ -77,7 +101,7 @@ function CookingScreen() {
                     </Text>
                 </View>
 
-            </View>
+            </Animated.View>
             
             <View>
 
