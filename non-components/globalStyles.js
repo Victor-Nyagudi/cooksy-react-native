@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import React from 'react';
 
+import { Easing } from "react-native";
+
 /*
     ? Fonts
     
@@ -35,6 +37,26 @@ export const ThemeContext = React.createContext({
     darkModeEnabled: true,
     toggleDarkMode: () => {}
 });
+
+// ? For shared animations across screens
+export const initialAnimatedValues = {
+    opacity: 0,
+    cardPosition: 80
+};
+
+export const animationConfig = {
+    opacity: {
+        toValue: 1,
+        duration: 900,
+        useNativeDriver: true
+    },
+    position: {
+        toValue: 0,
+        duration: 550,
+        easing: Easing.out(Easing.ease),
+        useNativeDriver: true
+    }
+};
 
 //#region Inherited styles
 

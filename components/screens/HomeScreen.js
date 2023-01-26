@@ -1,4 +1,4 @@
-import globalStyles, { colors, ThemeContext } from "../../non-components/globalStyles";
+import globalStyles, { ThemeContext, initialAnimatedValues, animationConfig } from "../../non-components/globalStyles";
 import {
     View,
     Text,
@@ -16,18 +16,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import RecipePrepInfo from "../shared/RecipePrepInfo";
 
-import { useContext, useRef, useEffect } from "react";
+import { useContext } from "react";
 
-function HomeScreen({ navigation, route }) {
+function HomeScreen({ navigation }) {
     const insets = useSafeAreaInsets();
     const themeContext = useContext(ThemeContext)
 
     const extraLightFontFamily = 'work-sans-extra-light';
 
-    const initialAnimatedValues = {
-        fade: new Animated.Value(0),
-        recipeCardPosition: new Animated.Value(80),
-        recommendedSectionPosition: new Animated.Value(80),
+    const startingAnimatedValues = {
+        opacity: new Animated.Value(initialAnimatedValues.opacity),
+        recipeCardPosition: new Animated.Value(initialAnimatedValues.cardPosition),
+        recommendedSectionPosition: new Animated.Value(initialAnimatedValues.cardPosition),
         remainingHeroCardsPosition: new Animated.Value(100)
     };
 
@@ -46,24 +46,10 @@ function HomeScreen({ navigation, route }) {
 
     if (navigation.isFocused()) {
         Animated.parallel([
-            Animated.timing(initialAnimatedValues.fade, {
-                toValue: 1,
-                duration: 900,
-                useNativeDriver: true
-            }),
-            Animated.timing(initialAnimatedValues.recipeCardPosition, {
-                toValue: 0,
-                duration: 550,
-                easing: Easing.out(Easing.ease),
-                useNativeDriver: true
-            }),
-            Animated.timing(initialAnimatedValues.recommendedSectionPosition, {
-                toValue: 0,
-                duration: 550,
-                easing: Easing.out(Easing.ease),
-                useNativeDriver: true
-            }),
-            Animated.timing(initialAnimatedValues.remainingHeroCardsPosition, {
+            Animated.timing(startingAnimatedValues.opacity, animationConfig.opacity),
+            Animated.timing(startingAnimatedValues.recipeCardPosition, animationConfig.position),
+            Animated.timing(startingAnimatedValues.recommendedSectionPosition, animationConfig.position),
+            Animated.timing(startingAnimatedValues.remainingHeroCardsPosition, {
                 toValue: 0,
                 delay: 250,
                 duration: 300,
@@ -89,8 +75,8 @@ function HomeScreen({ navigation, route }) {
                 >
                     <Animated.View style={{
                         ...globalStyles.recipeOfDay,
-                        opacity: initialAnimatedValues.fade,
-                        transform: [{ translateX: initialAnimatedValues.recipeCardPosition }],
+                        opacity: startingAnimatedValues.opacity,
+                        transform: [{ translateX: startingAnimatedValues.recipeCardPosition }],
                         backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                     }} >
                         <Text style={{
@@ -119,8 +105,8 @@ function HomeScreen({ navigation, route }) {
 
                     <Animated.View style={{ 
                         paddingTop: 31,
-                        opacity: initialAnimatedValues.fade,
-                        transform: [{ translateX: initialAnimatedValues.remainingHeroCardsPosition }], 
+                        opacity: startingAnimatedValues.opacity,
+                        transform: [{ translateX: startingAnimatedValues.remainingHeroCardsPosition }], 
                     }}>
                         <View style={{
                             ...globalStyles.heroCardTall,
@@ -170,8 +156,8 @@ function HomeScreen({ navigation, route }) {
 
                 <Animated.View style={{ 
                     ...globalStyles.recommendedRecipeContainer,
-                    transform: [{ translateY: initialAnimatedValues.recommendedSectionPosition }] ,
-                    opacity: initialAnimatedValues.fade
+                    transform: [{ translateY: startingAnimatedValues.recommendedSectionPosition }] ,
+                    opacity: startingAnimatedValues.opacity
                 }}>
                     <Text style={{
                         ...globalStyles.titleBig,

@@ -1,5 +1,5 @@
-import { View, Text, Animated, Easing } from "react-native";
-import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
+import { View, Text, Animated } from "react-native";
+import globalStyles, { ThemeContext, initialAnimatedValues, animationConfig } from "../../non-components/globalStyles";
 
 import { useContext } from "react";
 
@@ -9,24 +9,15 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 function CookingScreen({ navigation }) {
     const themeContext = useContext(ThemeContext);
 
-    const initialAnimatedValues = {
-        opacity: new Animated.Value(0),
-        cardPosition: new Animated.Value(80),
+    const startingAnimatedValues = {
+        opacity: new Animated.Value(initialAnimatedValues.opacity),
+        cardPosition: new Animated.Value(initialAnimatedValues.cardPosition),
     };
 
     if (navigation.isFocused()) {
         Animated.parallel([
-            Animated.timing(initialAnimatedValues.opacity, {
-                toValue: 1,
-                duration: 900,
-                useNativeDriver: true
-            }),
-            Animated.timing(initialAnimatedValues.cardPosition, {
-                toValue: 0,
-                duration: 550,
-                easing: Easing.out(Easing.ease),
-                useNativeDriver: true
-            })
+            Animated.timing(startingAnimatedValues.opacity, animationConfig.opacity),
+            Animated.timing(startingAnimatedValues.cardPosition, animationConfig.position)
         ]).start();
     }
 
@@ -37,8 +28,8 @@ function CookingScreen({ navigation }) {
             backgroundColor: themeContext.themeColors.backgroundColor
         }}>
             <Animated.View style={{
-                opacity: initialAnimatedValues.opacity,
-                transform: [{ translateX: initialAnimatedValues.cardPosition }]
+                opacity: startingAnimatedValues.opacity,
+                transform: [{ translateX: startingAnimatedValues.cardPosition }]
             }}>
                 <View style={{
                     ...globalStyles.cookingCard,
