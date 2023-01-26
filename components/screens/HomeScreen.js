@@ -24,65 +24,46 @@ function HomeScreen({ navigation, route }) {
 
     const extraLightFontFamily = 'work-sans-extra-light';
 
-    /*
-        * Initial value of 0.
-        * refs are good for animations because they can store 
-        * mutable values in an object that stays the same 
-        * on every render
-    */
-    const initialFadeValue = new Animated.Value(0);
-    const initialRecipeCardPosition = new Animated.Value(80);
-    const remainingHeroCardsPosition = new Animated.Value(100);
+    const initialAnimatedValues = {
+        fade: new Animated.Value(0),
+        recipeCardPosition: new Animated.Value(80),
+        recommendedSectionPosition: new Animated.Value(80),
+        remainingHeroCardsPosition: new Animated.Value(100)
+    };
 
     /*
-        * Using this instead of useEffect because screen 
+        * Using this 'if' statement instead of useEffect because the screen 
         * isn't re-rendered when switching tabs - only the 
         * custom tab bar is. This is because the stack navigator
         * is what renders all the screens in the tab bar, and
-        * switching back and forth from intro screen to 
+        * switching back and forth from IntroScreen to 
         * HomeTabNavigation is what causes a re-render.
         
         * Note that without adding the params object during 
-        * navigation in the tab navbar, this if statement will
+        * navigation in the tab navbar, this 'if' statement will
         * not be executed.
     */
-    useEffect(() => {
-        Animated.parallel([
-            Animated.timing(initialFadeValue, {
-                toValue: 1,
-                duration: 900,
-                useNativeDriver: true
-            }),
-            Animated.timing(initialRecipeCardPosition, {
-                toValue: 0,
-                duration: 550,
-                easing: Easing.out(Easing.ease),
-                useNativeDriver: true
-            }),
-            Animated.timing(remainingHeroCardsPosition, {
-                toValue: 0,
-                delay: 250,
-                duration: 300,
-                easing: Easing.out(Easing.ease),
-                useNativeDriver: true
-            })
-        ]).start();
-    }, []);
 
     if (navigation.isFocused()) {
         Animated.parallel([
-            Animated.timing(initialFadeValue, {
+            Animated.timing(initialAnimatedValues.fade, {
                 toValue: 1,
                 duration: 900,
                 useNativeDriver: true
             }),
-            Animated.timing(initialRecipeCardPosition, {
+            Animated.timing(initialAnimatedValues.recipeCardPosition, {
                 toValue: 0,
                 duration: 550,
                 easing: Easing.out(Easing.ease),
                 useNativeDriver: true
             }),
-            Animated.timing(remainingHeroCardsPosition, {
+            Animated.timing(initialAnimatedValues.recommendedSectionPosition, {
+                toValue: 0,
+                duration: 550,
+                easing: Easing.out(Easing.ease),
+                useNativeDriver: true
+            }),
+            Animated.timing(initialAnimatedValues.remainingHeroCardsPosition, {
                 toValue: 0,
                 delay: 250,
                 duration: 300,
@@ -108,8 +89,8 @@ function HomeScreen({ navigation, route }) {
                 >
                     <Animated.View style={{
                         ...globalStyles.recipeOfDay,
-                        opacity: initialFadeValue,
-                        transform: [{ translateX: initialRecipeCardPosition }],
+                        opacity: initialAnimatedValues.fade,
+                        transform: [{ translateX: initialAnimatedValues.recipeCardPosition }],
                         backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple
                     }} >
                         <Text style={{
@@ -138,8 +119,8 @@ function HomeScreen({ navigation, route }) {
 
                     <Animated.View style={{ 
                         paddingTop: 31,
-                        opacity: initialFadeValue,
-                        transform: [{ translateX: remainingHeroCardsPosition }], 
+                        opacity: initialAnimatedValues.fade,
+                        transform: [{ translateX: initialAnimatedValues.remainingHeroCardsPosition }], 
                     }}>
                         <View style={{
                             ...globalStyles.heroCardTall,
@@ -187,10 +168,10 @@ function HomeScreen({ navigation, route }) {
                     </Animated.View>
                 </ScrollView>
 
-                <View style={{ 
-                    paddingHorizontal: 25, 
-                    width: '100%',
-                    marginTop: 66 
+                <Animated.View style={{ 
+                    ...globalStyles.recommendedRecipeContainer,
+                    transform: [{ translateY: initialAnimatedValues.recommendedSectionPosition }] ,
+                    opacity: initialAnimatedValues.fade
                 }}>
                     <Text style={{
                         ...globalStyles.titleBig,
@@ -243,7 +224,7 @@ function HomeScreen({ navigation, route }) {
                             Browse more recipes
                         </Text>
                     </Pressable>
-                </View>
+                </Animated.View>
             </ScrollView>
         </View>
     );

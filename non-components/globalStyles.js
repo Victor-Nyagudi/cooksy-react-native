@@ -228,6 +228,11 @@ const globalStyles = StyleSheet.create({
         ...card,
         maxWidth: heroCardMaxWidth
     },
+    recommendedRecipeContainer: {
+        paddingHorizontal: 25, 
+        width: '100%',
+        marginTop: 66
+    },
     recommendedRecipe: { 
         ...card,
         marginBottom: 14
