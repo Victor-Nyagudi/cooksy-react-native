@@ -34,8 +34,6 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
     const initialBgHighlightPosition = new Animated.Value(bgHighlightInfo.prevTabButtonXCoordinate);
 
-    // console.log(bgHighlightInfo.prevTabButtonXCoordinate);
-
     Animated.timing(initialBgHighlightPosition, {
         toValue: bgHighlightInfo.activeTabButtonXCoordinate,
         duration: 500,
@@ -69,11 +67,8 @@ function CustomTabBar({ state, descriptors, navigation }) {
                     height: bgHighlightInfo.height,
                     position: 'absolute',
                     top: globalStyles.tabBarContainer.paddingVertical,
-                    // left: bgHighlightInfo.activeTabButtonXCoordinate,
                     backgroundColor: themeContext.themeColors.whiteOrDarkBrown,
                     borderRadius: globalStyles.tabBarButton.borderRadius,
-                    // opacity: .45,
-                    // zIndex: 1,
                     transform: [{ translateX: initialBgHighlightPosition }]
                 }}>
                      {/* 
