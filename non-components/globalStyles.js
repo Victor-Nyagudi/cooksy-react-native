@@ -172,7 +172,19 @@ const globalStyles = StyleSheet.create({
         
         marginHorizontal: 15,
         paddingHorizontal: 7,
-        paddingVertical: 6
+        paddingVertical: 6,
+
+        // ? shadowRadius, shadowOffset only work on iOS
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#FF0000',
+
+        /*
+            ? Only way to have box shadow on Android is by using elevation
+            ? Seems changing the color isn't possible on Android.
+            ? https://reactnative.dev/docs/shadow-props
+        */ 
+        elevation: 20
     },
     tabBarButton: {
         flex: 1,
