@@ -213,12 +213,12 @@ const globalStyles = StyleSheet.create({
 
     //#region Home Screen styles
     homeScreenScrollContainer: {
-        backgroundColor: colors.offWhite,
-        paddingTop: 50
+        backgroundColor: colors.offWhite
     },
     homeScreenHero: {
         alignItems: 'flex-start',
-        paddingLeft: 25
+        paddingLeft: 25,
+        paddingTop: 50
     },
     homeScreenHeroCaret: {
         position: 'absolute',
