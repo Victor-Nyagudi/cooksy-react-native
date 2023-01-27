@@ -1,11 +1,13 @@
-import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
+import globalStyles, { ThemeContext, initialAnimatedValues, animationConfig } from "../../non-components/globalStyles";
 
 import React, { useState, useContext } from 'react';
 
-import { View, ScrollView } from "react-native";
-import RecipesColumn from "../RecipesColumn";
+import { View, ScrollView, Image, Text, Animated } from "react-native";
+// import RecipesColumn from "../RecipesColumn";
+import RecipePrepInfo from "../shared/RecipePrepInfo";
 
-function RecipesScreen() {
+
+function RecipesScreen({ navigation }) {
     const [recipes, setRecipes] = useState([
         {
             "id": 1,
@@ -123,7 +125,7 @@ function RecipesScreen() {
     
     const recipeColumnMaxWidth = 
         recipesContainerWidth ? .48 * recipesContainerWidth
-        : '100%';
+        : '48%';
 
     /*
         * As calculated above, each column will take up 48% of
@@ -136,10 +138,47 @@ function RecipesScreen() {
     */        
     const rowGap = 
         recipesContainerWidth ? .04 * recipesContainerWidth
-        : 10;
+        : 15; 
+        /*
+            * 15 (for rowGap) is kind of a magic number I arrived at by seeing 
+            * how much the cards jumped around when page loaded and adjusted the
+            * number accordingly.
+        */ 
 
     const themeContext = useContext(ThemeContext);
 
+    const startingAnimatedValues = {
+        topCardPosition: new Animated.Value(50),
+        otherCardsPosition: new Animated.Value(90),
+        topCardOpacity: new Animated.Value(initialAnimatedValues.opacity),
+        otherCardsOpacity: new Animated.Value(initialAnimatedValues.opacity)
+    };
+    
+    // console.log(typeof topCardPosition);
+
+    if (navigation.isFocused()) {
+    }
+    Animated.parallel([
+        Animated.timing(startingAnimatedValues.topCardPosition, {
+            ...animationConfig.position,
+            duration: 450
+        }),
+        Animated.timing(startingAnimatedValues.topCardOpacity, animationConfig.opacity),
+        Animated.timing(startingAnimatedValues.otherCardsPosition, {
+            ...animationConfig.position,
+            duration: 450
+            // delay: 400
+        }),
+        Animated.timing(startingAnimatedValues.otherCardsOpacity, {
+            ...animationConfig.opacity,
+            // delay: 400
+        })
+    ]).start();
+
+    /*
+        ! Don't delete comments until issue #7 is addressed
+        ! https://github.com/Victor-Nyagudi/cooksy-react-native/issues/7
+    */
     return ( 
         <View style={{
             ...globalStyles.container,
@@ -168,9 +207,136 @@ function RecipesScreen() {
             <ScrollView 
                 showsVerticalScrollIndicator={ false }
                 contentContainerStyle={ globalStyles.recipeColumnsContainer }
-                onLayout={ event => setRecipesContainerWidth(event.nativeEvent.layout.width) }
+                // onLayout={ event => setRecipesContainerWidth(event.nativeEvent.layout.width) }
             >
-                    <RecipesColumn 
+                {/* 
+                    This View was initially extracted into a component (RecipesColumn) but
+                    because of the animations, I opted to repeat the code. Since the recipe
+                    cards inside the View is animated, extracting the code into a component
+                    and using the component twice results in the animation playing twice causing
+                    a brief flash of the first animation which is then interrupted by the second
+                    animation. Having all the code inside RecipesScreen means the animation plays
+                    only once.
+
+                    The onLayout event (above in the ScrollView) is necessary, but it causes a 
+                    re-render due to setRecipesContainerWidth
+                */}
+                <View style={{ 
+                    flex:1,
+                    maxWidth: recipeColumnMaxWidth,
+                    marginTop: 0 
+                }}>
+                    {
+                        recipes
+                        .filter(recipe => recipe.id % 2 == 1)
+                        .map((recipe, index) => {
+                            return (
+                                <Animated.View 
+                                    key={ recipe.id }
+                                    style={{
+                                    ...globalStyles.recipeCard,
+                                    marginBottom: rowGap,
+                                    backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple,
+                                    transform: [{ 
+                                        translateY: index === 0
+                                            ? startingAnimatedValues.topCardPosition
+                                            : startingAnimatedValues.otherCardsPosition
+                                    }],
+                                    opacity: index === 0
+                                        ? startingAnimatedValues.topCardOpacity
+                                        : startingAnimatedValues.otherCardsOpacity
+                                }}>
+                                    <Image 
+                                        source={{ uri: recipe.imageUri }} // * <- Investigate why this might be bad based on docs
+                                        style={ globalStyles.recipeImage }
+                                    />
+                    
+                                    <Text style={{
+                                        ...globalStyles.cardTitleSmall,
+                                        marginBottom: 3,
+                                        color: themeContext.themeColors.whiteOrDarkBrown
+                                    }}>
+                                        { recipe.title }
+                                    </Text>
+                                    
+                                    <Text style={{
+                                        ...globalStyles.recipePrepText,
+                                        marginBottom: 30,
+                                        color: themeContext.themeColors.whiteOrDarkBrown
+                                    }}>
+                                        { recipe.blurb }
+                                    </Text>
+                    
+                                    <RecipePrepInfo 
+                                        prepTimeInMinutes={ recipe.prepTimeInMinutes }
+                                        numberOfServings={ recipe.numberOfServings }
+                                        marginBottom={ 0 }
+                                    />
+                                </Animated.View>
+                            )
+                        })
+                    }
+                </View>
+                
+                <View style={{ 
+                    flex:1,
+                    maxWidth: recipeColumnMaxWidth,
+                    marginTop: 37 
+                }}>
+                    {
+                        recipes
+                        .filter(recipe => recipe.id % 2 == 0)
+                        .map((recipe, index) => {
+                            return (
+                                <Animated.View 
+                                    key={ recipe.id }
+                                    style={{
+                                    ...globalStyles.recipeCard,
+                                    marginBottom: rowGap,
+                                    backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple,
+                                    transform: [{ 
+                                        translateY: index === 0
+                                            ? startingAnimatedValues.topCardPosition
+                                            : startingAnimatedValues.otherCardsPosition
+                                    }],
+                                    opacity: index === 0
+                                        ? startingAnimatedValues.topCardOpacity
+                                        : startingAnimatedValues.otherCardsOpacity
+                                }}>
+                                    <Image 
+                                        source={{ uri: recipe.imageUri }} // * <- Investigate why this might be bad based on docs
+                                        style={ globalStyles.recipeImage }
+                                    />
+                    
+                                    <Text style={{
+                                        ...globalStyles.cardTitleSmall,
+                                        marginBottom: 3,
+                                        color: themeContext.themeColors.whiteOrDarkBrown
+                                    }}>
+                                        { recipe.title }
+                                    </Text>
+                                    
+                                    <Text style={{
+                                        ...globalStyles.recipePrepText,
+                                        marginBottom: 30,
+                                        color: themeContext.themeColors.whiteOrDarkBrown
+                                    }}>
+                                        { recipe.blurb }
+                                    </Text>
+                    
+                                    <RecipePrepInfo 
+                                        prepTimeInMinutes={ recipe.prepTimeInMinutes }
+                                        numberOfServings={ recipe.numberOfServings }
+                                        marginBottom={ 0 }
+                                    />
+                                </Animated.View>
+                            )
+                        })
+                    }
+                </View>
+                
+                
+                    {/* <RecipesColumn 
                         recipes={ recipes.filter(recipe => recipe.id % 2 == 1) }
                         rowGap={ rowGap }
                         recipeColumnMaxWidth={ recipeColumnMaxWidth }
@@ -181,7 +347,7 @@ function RecipesScreen() {
                         rowGap={ rowGap }
                         recipeColumnMaxWidth={ recipeColumnMaxWidth }
                         marginTop={ 37 }
-                    />
+                    /> */}
             </ScrollView>
         </View>
     );
