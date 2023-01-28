@@ -177,7 +177,7 @@ const globalStyles = StyleSheet.create({
         // ? shadowRadius, shadowOffset only work on iOS
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 3 },
-        shadowColor: '#FF0000',
+        shadowColor: 'hsla(0, 0%, 0%, .05)',
 
         /*
             ? Only way to have box shadow on Android is by using elevation
