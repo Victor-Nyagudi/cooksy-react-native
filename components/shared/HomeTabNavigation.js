@@ -5,6 +5,8 @@ import RecipesScreen from "../screens/RecipesScreen";
 import CookingScreen from "../screens/CookingScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
+import MyRecipesStack from "./MyRecipesStack";
+
 import CustomTabBar from "./CustomTabBar";
 
 
@@ -18,7 +20,7 @@ function HomeTabNavigation() {
         >
             <Tab.Screen name="Inspirations" component={ HomeScreen }/>
 
-            <Tab.Screen name="My Recipes" component={ RecipesScreen } />
+            <Tab.Screen name="My Recipes" component={ MyRecipesStack } />
 
             <Tab.Screen name="Cook Now!" component={ CookingScreen } />
 

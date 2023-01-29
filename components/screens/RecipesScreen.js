@@ -155,10 +155,6 @@ function RecipesScreen({ navigation }) {
         otherCardsOpacity: new Animated.Value(initialAnimatedValues.opacity)
     };
     
-    // console.log(typeof topCardPosition);
-
-    if (navigation.isFocused()) {
-    }
     Animated.parallel([
         Animated.timing(startingAnimatedValues.topCardPosition, {
             ...animationConfig.position,
@@ -356,7 +352,7 @@ function RecipesScreen({ navigation }) {
                 <WideButton 
                     text={ 'Add recipe' }
                     navigation={ navigation }
-                    navigationLocation={ 'Settings' }
+                    navigationLocation={ 'Add Recipe' }
                 />
             </ScrollView>
         </View>
