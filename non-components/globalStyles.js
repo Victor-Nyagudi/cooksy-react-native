@@ -28,6 +28,7 @@ export const colors = {
     darkBrown: 'hsla(342, 30%, 8%, 1.0)', // #1C0F13
     translucentDarkBrown: 'hsla(342, 30%, 8%, 0.65)', // #1C0F13
     partialOpacityDarkBrown: 'hsla(342, 30%, 8%, .9)',
+    darkBrown10PercentOpacity: 'hsla(342, 30%, 8%, 0.1)',
 
     // * Shared
     white: 'hsla(0, 0%, 100%, 1.0)' // #FFFFFF
@@ -306,6 +307,28 @@ const globalStyles = StyleSheet.create({
     cookingCardText: {
         fontFamily: 'roboto-light',
         fontSize: 16
+    },
+    //#endregion
+
+    //#region 
+    inputContainer: {
+        width: '100%',
+        marginBottom: 18
+    },
+    input: {
+        borderRadius: borderRadius.parent,
+
+        width: '100%',
+        padding: 13,
+        backgroundColor: colors.darkBrown10PercentOpacity,
+
+        fontFamily: 'nunito-regular',
+        fontSize: 16
+    },
+    inputLabel: {
+        fontFamily: 'nunito-bold',
+        fontSize: 16,
+        marginBottom: 8
     }
     //#endregion
 });

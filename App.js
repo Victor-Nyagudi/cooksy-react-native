@@ -70,7 +70,9 @@ export default function App() {
     transparentOrDarkGreyPurple: 
       getColor('transparent', colors.darkGreyPurple),
     darkBrownOrDarkGreyPurple: 
-      getColor(colors.darkBrown, colors.darkGreyPurple)
+      getColor(colors.darkBrown, colors.darkGreyPurple),
+    darkBrown10PercentOpacityOrDarkGreyPurple:
+      getColor(colors.darkBrown10PercentOpacity, colors.darkGreyPurple)
   };
 
   function getColor(lightModeColor, darkModeColor) {

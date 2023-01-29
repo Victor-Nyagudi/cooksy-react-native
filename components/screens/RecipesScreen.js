@@ -349,11 +349,13 @@ function RecipesScreen({ navigation }) {
 
                 </ScrollView>
 
-                <WideButton 
-                    text={ 'Add recipe' }
-                    navigation={ navigation }
-                    navigationLocation={ 'Add Recipe' }
-                />
+                <Animated.View style={{ opacity: startingAnimatedValues.topCardOpacity }}>
+                    <WideButton 
+                        text={ 'Add recipe' }
+                        navigation={ navigation }
+                        navigationLocation={ 'Add Recipe' }
+                    />
+                </Animated.View>
             </ScrollView>
         </View>
     );
