@@ -1,13 +1,18 @@
-import globalStyles from "../../non-components/globalStyles";
+import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
 
 import { Text, View, TextInput } from "react-native";
+
+import { useContext } from "react";
 
 function Input({ 
     labelText,
     placeholder,
-    keyboardType,
-    themeContext
+    keyboardType = 'default',
+    maxLength = 75,
+    isMultiline = false
  }) {
+    const themeContext = useContext(ThemeContext);
+
     return ( 
         <View style={ globalStyles.inputContainer }>
             <Text style={{
@@ -31,7 +36,9 @@ function Input({
                 placeholder={ placeholder }
                 placeholderTextColor={ themeContext.themeColors.translucentDarkBrownOrGrey }
                 keyboardType={ keyboardType }
-                onFocus={ () => inputIsFocused = true }
+                // onFocus={ () => inputIsFocused = true }
+                maxLength={ maxLength }
+                multiline={ isMultiline }
             />
         </View>
     );
