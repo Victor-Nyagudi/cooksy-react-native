@@ -9,12 +9,16 @@ function Input({
     placeholder,
     keyboardType = 'default',
     maxLength = 75,
-    isMultiline = false
+    isMultiline = false,
+    marginBottom = 24
  }) {
     const themeContext = useContext(ThemeContext);
 
     return ( 
-        <View style={ globalStyles.inputContainer }>
+        <View style={{
+            ...globalStyles.inputContainer,
+            marginBottom: marginBottom
+        }}>
             <Text style={{
                 ...globalStyles.inputLabel,
                 color: themeContext.themeColors.whiteOrDarkBrown

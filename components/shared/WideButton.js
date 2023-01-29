@@ -9,7 +9,8 @@ function WideButton({
     navigation,
     navigationLocation, 
     isTransparent = false, 
-    marginBottom = 0
+    marginBottom = 0,
+    goBack = false
 }) {
     const themeContext = useContext(ThemeContext);
 
@@ -28,10 +29,11 @@ function WideButton({
                 
                 {
                     ...globalStyles.wideButtonSolid,
+                    marginBottom: marginBottom,
                     backgroundColor: themeContext.themeColors.whiteOrDarkBrown
                 }
             }
-            onPress={ () => navigation.navigate(navigationLocation) }
+            onPress={ () => goBack ? navigation.goBack() : navigation.navigate(navigationLocation) }
         >
             <Text style={{
                 ...globalStyles.wideButtonText,

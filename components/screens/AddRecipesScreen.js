@@ -3,8 +3,9 @@ import { View, ScrollView } from "react-native";
 
 import { useContext } from "react";
 import Input from "../shared/Input";
+import WideButton from "../shared/WideButton";
 
-function AddRecipesScreen() {
+function AddRecipesScreen({ navigation }) {
     const themeContext = useContext(ThemeContext);
 
     return ( 
@@ -13,7 +14,10 @@ function AddRecipesScreen() {
             alignItems: 'flex-start',
             backgroundColor: themeContext.themeColors.backgroundColor
         }}>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ 
+                maxWidth: '100%',
+                paddingBottom: 69 
+            }}>
                 <Input 
                     labelText={ 'Title' }
                     placeholder={ 'e.g. Sweet and Sour Chicken' }
@@ -50,6 +54,21 @@ function AddRecipesScreen() {
                     labelText={ 'Image URI' }
                     placeholder={ 'e.g. https://source.unsplash.com/VctkjZHOqlo' }
                     keyboardType={ 'url' }
+                    marginBottom={ 24 }
+                />
+
+                <WideButton
+                    text={ 'Add' }
+                    navigation={ navigation }
+                    navigationLocation={ 'My Recipes' }
+                    marginBottom={ 12 }
+                />
+                
+                <WideButton
+                    text={ 'Cancel' }
+                    navigation={ navigation }
+                    isTransparent={ true }
+                    goBack={ true }
                 />
             </ScrollView>
         </View>
