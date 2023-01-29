@@ -107,7 +107,7 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.offWhite,
         paddingHorizontal: 30
     },
-    wideButton: {
+    wideButtonSolid: {
         ...wideButton,
         backgroundColor: colors.darkBrown
     },

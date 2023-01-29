@@ -8,6 +8,7 @@ import DarkModeIllustration from "../miscellaneous/DarkModeIllustration";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../non-components/globalStyles";
+import WideButton from "../shared/WideButton";
 
 function IntroScreen({ navigation }) {
     const insets = useSafeAreaInsets();
@@ -65,20 +66,11 @@ function IntroScreen({ navigation }) {
             </View>
                 
             <View style={ globalStyles.introScreenButtonContainer }>
-                <Pressable 
-                    style={{
-                        ...globalStyles.wideButton,
-                        backgroundColor: themeContext.themeColors.whiteOrDarkBrown
-                    }}
-                    onPress={ () => navigation.navigate('Home') }
-                >
-                    <Text style={{
-                        ...globalStyles.wideButtonText,
-                        color: themeContext.themeColors.whiteOrDarkCharcoalGrey
-                    }}>
-                        Let's start
-                    </Text>
-                </Pressable>
+                <WideButton
+                    text={ "Let's start" }
+                    navigationLocation={ 'Home' }
+                    navigation={ navigation }
+                />
             </View>
         </View>
     );

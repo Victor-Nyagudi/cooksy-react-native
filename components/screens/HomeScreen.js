@@ -1,4 +1,8 @@
-import globalStyles, { ThemeContext, initialAnimatedValues, animationConfig } from "../../non-components/globalStyles";
+import globalStyles, { 
+    ThemeContext, 
+    initialAnimatedValues, 
+    animationConfig 
+} from "../../non-components/globalStyles";
 import {
     View,
     Text,
@@ -17,6 +21,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import RecipePrepInfo from "../shared/RecipePrepInfo";
 
 import { useContext } from "react";
+import WideButton from "../shared/WideButton";
 
 function HomeScreen({ navigation }) {
     const insets = useSafeAreaInsets();
@@ -194,22 +199,13 @@ function HomeScreen({ navigation }) {
                         <RecipePrepInfo marginBottom={ 0 }/>
                     </View>
 
-                    <Pressable
-                        style={{
-                            ...globalStyles.wideButtonTransparent,
-                            marginBottom: 44,
-                            backgroundColor: themeContext.themeColors.transparentOrDarkGreyPurple,
-                            borderColor: themeContext.themeColors.darkBrownOrDarkGreyPurple
-                        }}
-                        onPress={() => navigation.navigate('My Recipes')}
-                    >
-                        <Text style={{
-                            ...globalStyles.wideButtonText,
-                            color: themeContext.themeColors.whiteOrDarkBrown
-                        }}>
-                            Browse more recipes
-                        </Text>
-                    </Pressable>
+                    <WideButton 
+                        text={ "Browse more recipes" }
+                        navigation={ navigation }
+                        navigationLocation={ 'My Recipes' }
+                        isTransparent={ true }
+                        marginBottom={ 44 }
+                    />
                 </Animated.View>
             </ScrollView>
         </View>
