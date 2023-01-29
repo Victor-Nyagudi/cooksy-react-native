@@ -5,6 +5,7 @@ import React, { useState, useContext } from 'react';
 import { View, ScrollView, Image, Text, Animated } from "react-native";
 // import RecipesColumn from "../RecipesColumn";
 import RecipePrepInfo from "../shared/RecipePrepInfo";
+import WideButton from "../shared/WideButton";
 
 
 function RecipesScreen({ navigation }) {
@@ -204,150 +205,159 @@ function RecipesScreen({ navigation }) {
                 this resulted in each column scrolling independently. 
             */}
 
-            <ScrollView 
-                showsVerticalScrollIndicator={ false }
-                contentContainerStyle={ globalStyles.recipeColumnsContainer }
-                // onLayout={ event => setRecipesContainerWidth(event.nativeEvent.layout.width) }
-            >
-                {/* 
-                    This View was initially extracted into a component (RecipesColumn) but
-                    because of the animations, I opted to repeat the code. Since the recipe
-                    cards inside the View is animated, extracting the code into a component
-                    and using the component twice results in the animation playing twice causing
-                    a brief flash of the first animation which is then interrupted by the second
-                    animation. Having all the code inside RecipesScreen means the animation plays
-                    only once.
+            <ScrollView contentContainerStyle={{ paddingBottom: 14 }}>
+                <ScrollView 
+                    showsVerticalScrollIndicator={ false }
+                    contentContainerStyle={ globalStyles.recipeColumnsContainer }
+                    // onLayout={ event => setRecipesContainerWidth(event.nativeEvent.layout.width) }
+                >
+                    {/* 
+                        This View was initially extracted into a component (RecipesColumn) but
+                        because of the animations, I opted to repeat the code. Since the recipe
+                        cards inside the View is animated, extracting the code into a component
+                        and using the component twice results in the animation playing twice causing
+                        a brief flash of the first animation which is then interrupted by the second
+                        animation. Having all the code inside RecipesScreen means the animation plays
+                        only once.
 
-                    The onLayout event (above in the ScrollView) is necessary, but it causes a 
-                    re-render due to setRecipesContainerWidth
-                */}
-                <View style={{ 
-                    flex:1,
-                    maxWidth: recipeColumnMaxWidth,
-                    marginTop: 0 
-                }}>
-                    {
-                        recipes
-                        .filter(recipe => recipe.id % 2 == 1)
-                        .map((recipe, index) => {
-                            return (
-                                <Animated.View 
-                                    key={ recipe.id }
-                                    style={{
-                                    ...globalStyles.recipeCard,
-                                    marginBottom: rowGap,
-                                    backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple,
-                                    transform: [{ 
-                                        translateY: index === 0
-                                            ? startingAnimatedValues.topCardPosition
-                                            : startingAnimatedValues.otherCardsPosition
-                                    }],
-                                    opacity: index === 0
-                                        ? startingAnimatedValues.topCardOpacity
-                                        : startingAnimatedValues.otherCardsOpacity
-                                }}>
-                                    <Image 
-                                        source={{ uri: recipe.imageUri }} // * <- Investigate why this might be bad based on docs
-                                        style={ globalStyles.recipeImage }
-                                    />
-                    
-                                    <Text style={{
-                                        ...globalStyles.cardTitleSmall,
-                                        marginBottom: 3,
-                                        color: themeContext.themeColors.whiteOrDarkBrown
+                        The onLayout event (above in the ScrollView) is necessary, but it causes a 
+                        re-render due to setRecipesContainerWidth
+                    */}
+                    <View style={{ 
+                        flex:1,
+                        maxWidth: recipeColumnMaxWidth,
+                        marginTop: 0 
+                    }}>
+                        {
+                            recipes
+                            .filter(recipe => recipe.id % 2 == 1)
+                            .map((recipe, index) => {
+                                return (
+                                    <Animated.View 
+                                        key={ recipe.id }
+                                        style={{
+                                        ...globalStyles.recipeCard,
+                                        marginBottom: rowGap,
+                                        backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple,
+                                        transform: [{ 
+                                            translateY: index === 0
+                                                ? startingAnimatedValues.topCardPosition
+                                                : startingAnimatedValues.otherCardsPosition
+                                        }],
+                                        opacity: index === 0
+                                            ? startingAnimatedValues.topCardOpacity
+                                            : startingAnimatedValues.otherCardsOpacity
                                     }}>
-                                        { recipe.title }
-                                    </Text>
-                                    
-                                    <Text style={{
-                                        ...globalStyles.recipePrepText,
-                                        marginBottom: 30,
-                                        color: themeContext.themeColors.whiteOrDarkBrown
+                                        <Image 
+                                            source={{ uri: recipe.imageUri }} // * <- Investigate why this might be bad based on docs
+                                            style={ globalStyles.recipeImage }
+                                        />
+                        
+                                        <Text style={{
+                                            ...globalStyles.cardTitleSmall,
+                                            marginBottom: 3,
+                                            color: themeContext.themeColors.whiteOrDarkBrown
+                                        }}>
+                                            { recipe.title }
+                                        </Text>
+                                        
+                                        <Text style={{
+                                            ...globalStyles.recipePrepText,
+                                            marginBottom: 30,
+                                            color: themeContext.themeColors.whiteOrDarkBrown
+                                        }}>
+                                            { recipe.blurb }
+                                        </Text>
+                        
+                                        <RecipePrepInfo 
+                                            prepTimeInMinutes={ recipe.prepTimeInMinutes }
+                                            numberOfServings={ recipe.numberOfServings }
+                                            marginBottom={ 0 }
+                                        />
+                                    </Animated.View>
+                                )
+                            })
+                        }
+                    </View>
+                    
+                    <View style={{ 
+                        flex:1,
+                        maxWidth: recipeColumnMaxWidth,
+                        marginTop: 37 
+                    }}>
+                        {
+                            recipes
+                            .filter(recipe => recipe.id % 2 == 0)
+                            .map((recipe, index) => {
+                                return (
+                                    <Animated.View 
+                                        key={ recipe.id }
+                                        style={{
+                                        ...globalStyles.recipeCard,
+                                        marginBottom: rowGap,
+                                        backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple,
+                                        transform: [{ 
+                                            translateY: index === 0
+                                                ? startingAnimatedValues.topCardPosition
+                                                : startingAnimatedValues.otherCardsPosition
+                                        }],
+                                        opacity: index === 0
+                                            ? startingAnimatedValues.topCardOpacity
+                                            : startingAnimatedValues.otherCardsOpacity
                                     }}>
-                                        { recipe.blurb }
-                                    </Text>
+                                        <Image 
+                                            source={{ uri: recipe.imageUri }} // * <- Investigate why this might be bad based on docs
+                                            style={ globalStyles.recipeImage }
+                                        />
+                        
+                                        <Text style={{
+                                            ...globalStyles.cardTitleSmall,
+                                            marginBottom: 3,
+                                            color: themeContext.themeColors.whiteOrDarkBrown
+                                        }}>
+                                            { recipe.title }
+                                        </Text>
+                                        
+                                        <Text style={{
+                                            ...globalStyles.recipePrepText,
+                                            marginBottom: 30,
+                                            color: themeContext.themeColors.whiteOrDarkBrown
+                                        }}>
+                                            { recipe.blurb }
+                                        </Text>
+                        
+                                        <RecipePrepInfo 
+                                            prepTimeInMinutes={ recipe.prepTimeInMinutes }
+                                            numberOfServings={ recipe.numberOfServings }
+                                            marginBottom={ 0 }
+                                        />
+                                    </Animated.View>
+                                )
+                            })
+                        }
+                    </View>
                     
-                                    <RecipePrepInfo 
-                                        prepTimeInMinutes={ recipe.prepTimeInMinutes }
-                                        numberOfServings={ recipe.numberOfServings }
-                                        marginBottom={ 0 }
-                                    />
-                                </Animated.View>
-                            )
-                        })
-                    }
-                </View>
-                
-                <View style={{ 
-                    flex:1,
-                    maxWidth: recipeColumnMaxWidth,
-                    marginTop: 37 
-                }}>
-                    {
-                        recipes
-                        .filter(recipe => recipe.id % 2 == 0)
-                        .map((recipe, index) => {
-                            return (
-                                <Animated.View 
-                                    key={ recipe.id }
-                                    style={{
-                                    ...globalStyles.recipeCard,
-                                    marginBottom: rowGap,
-                                    backgroundColor: themeContext.themeColors.whiteOrDarkGreyPurple,
-                                    transform: [{ 
-                                        translateY: index === 0
-                                            ? startingAnimatedValues.topCardPosition
-                                            : startingAnimatedValues.otherCardsPosition
-                                    }],
-                                    opacity: index === 0
-                                        ? startingAnimatedValues.topCardOpacity
-                                        : startingAnimatedValues.otherCardsOpacity
-                                }}>
-                                    <Image 
-                                        source={{ uri: recipe.imageUri }} // * <- Investigate why this might be bad based on docs
-                                        style={ globalStyles.recipeImage }
-                                    />
                     
-                                    <Text style={{
-                                        ...globalStyles.cardTitleSmall,
-                                        marginBottom: 3,
-                                        color: themeContext.themeColors.whiteOrDarkBrown
-                                    }}>
-                                        { recipe.title }
-                                    </Text>
-                                    
-                                    <Text style={{
-                                        ...globalStyles.recipePrepText,
-                                        marginBottom: 30,
-                                        color: themeContext.themeColors.whiteOrDarkBrown
-                                    }}>
-                                        { recipe.blurb }
-                                    </Text>
-                    
-                                    <RecipePrepInfo 
-                                        prepTimeInMinutes={ recipe.prepTimeInMinutes }
-                                        numberOfServings={ recipe.numberOfServings }
-                                        marginBottom={ 0 }
-                                    />
-                                </Animated.View>
-                            )
-                        })
-                    }
-                </View>
-                
-                
-                    {/* <RecipesColumn 
-                        recipes={ recipes.filter(recipe => recipe.id % 2 == 1) }
-                        rowGap={ rowGap }
-                        recipeColumnMaxWidth={ recipeColumnMaxWidth }
-                    />
-                    
-                    <RecipesColumn 
-                        recipes={ recipes.filter(recipe => recipe.id % 2 == 0) }
-                        rowGap={ rowGap }
-                        recipeColumnMaxWidth={ recipeColumnMaxWidth }
-                        marginTop={ 37 }
-                    /> */}
+                        {/* <RecipesColumn 
+                            recipes={ recipes.filter(recipe => recipe.id % 2 == 1) }
+                            rowGap={ rowGap }
+                            recipeColumnMaxWidth={ recipeColumnMaxWidth }
+                        />
+                        
+                        <RecipesColumn 
+                            recipes={ recipes.filter(recipe => recipe.id % 2 == 0) }
+                            rowGap={ rowGap }
+                            recipeColumnMaxWidth={ recipeColumnMaxWidth }
+                            marginTop={ 37 }
+                        /> */}
+
+                </ScrollView>
+
+                <WideButton 
+                    text={ 'Add recipe' }
+                    navigation={ navigation }
+                    navigationLocation={ 'Settings' }
+                />
             </ScrollView>
         </View>
     );
