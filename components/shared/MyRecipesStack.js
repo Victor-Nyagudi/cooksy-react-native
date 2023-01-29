@@ -7,7 +7,9 @@ const Stack = createNativeStackNavigator();
 
 function MyRecipesStack() {
     return ( 
-        <Stack.Navigator>
+        <Stack.Navigator 
+            screenOptions={{ headerShown: false }}
+        >
             {/*
                 Rendering the 'RecipesScreen' this way ensures the animation
                 plays i.e. recipe cards move up with increasing opacity.
@@ -17,10 +19,7 @@ function MyRecipesStack() {
                 Read more about passing props to screens here.
                 https://reactnavigation.org/docs/hello-react-navigation#passing-additional-props
             */}
-            <Stack.Screen 
-                name="Recipes" 
-                options={{ headerShown: false }}
-            >
+            <Stack.Screen name="Recipes">
                 {(props) => <RecipesScreen {...props}  />}
             </Stack.Screen>
             

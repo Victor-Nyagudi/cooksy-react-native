@@ -1,5 +1,5 @@
 import globalStyles, { ThemeContext } from "../../non-components/globalStyles";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 
 import { useContext } from "react";
 import Input from "../shared/Input";
@@ -14,10 +14,14 @@ function AddRecipesScreen({ navigation }) {
             alignItems: 'flex-start',
             backgroundColor: themeContext.themeColors.backgroundColor
         }}>
-            <ScrollView contentContainerStyle={{ 
-                maxWidth: '100%',
-                paddingBottom: 69 
-            }}>
+            <ScrollView contentContainerStyle={ globalStyles.formScrollContainer }>
+                <Text style={{
+                    ...globalStyles.formTitle,
+                    color: themeContext.themeColors.whiteOrDarkBrown
+                }}>
+                    Add a recipe
+                </Text>
+
                 <Input 
                     labelText={ 'Title' }
                     placeholder={ 'e.g. Sweet and Sour Chicken' }

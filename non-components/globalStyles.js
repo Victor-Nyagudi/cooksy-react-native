@@ -310,7 +310,7 @@ const globalStyles = StyleSheet.create({
     },
     //#endregion
 
-    //#region 
+    //#region Add Recipe Screen styles
     inputContainer: {
         width: '100%',
         marginBottom: 18
@@ -329,6 +329,17 @@ const globalStyles = StyleSheet.create({
         fontFamily: 'nunito-bold',
         fontSize: 16,
         marginBottom: 8
+    },
+    formTitle: {
+        fontFamily: 'work-sans-semi-bold',
+        fontSize: 25,
+        marginBottom: 27,
+        color: colors.darkBrown
+    },
+    formScrollContainer: {
+        maxWidth: '100%',
+        paddingBottom: 69,
+        paddingTop: 20
     }
     //#endregion
 });
